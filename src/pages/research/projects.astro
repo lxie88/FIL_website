@@ -1,0 +1,80 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Header from '~/components/widgets/Header.astro';
+import Footer from '~/components/widgets/Footer.astro';
+import { headerData, footerData } from '~/navigation';
+
+const metadata = {
+  title: 'Research Projects',
+  description: 'Explore our ongoing and completed research projects in fluid dynamics and engineering.',
+};
+
+const projects = [
+  {
+    title: 'Advanced CFD Modeling',
+    description: 'Developing next-generation computational fluid dynamics models for complex flow phenomena.',
+    image: 'https://images.unsplash.com/photo-1581093458791-9f3c3250a8b7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+    status: 'Ongoing',
+    team: ['Dr. Smith', 'Dr. Johnson', 'PhD Student A'],
+  },
+  {
+    title: 'Microfluidics for Healthcare',
+    description: 'Creating innovative microfluidic devices for point-of-care diagnostics and drug delivery.',
+    image: 'https://images.unsplash.com/photo-1576086213369-97a306d36557?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2080&q=80',
+    status: 'Ongoing',
+    team: ['Dr. Williams', 'Dr. Brown', 'PhD Student B'],
+  },
+  {
+    title: 'Sustainable Fluid Systems',
+    description: 'Investigating energy-efficient fluid handling systems for industrial applications.',
+    image: 'https://images.unsplash.com/photo-1581093458791-9f3c3250a8b7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+    status: 'Completed',
+    team: ['Dr. Davis', 'Dr. Miller', 'PhD Student C'],
+  },
+];
+---
+
+<Layout metadata={metadata}>
+  <Header {...headerData} />
+  <main>
+    <section class="px-4 py-16 sm:px-6 mx-auto lg:px-8 lg:py-20 max-w-7xl">
+      <div class="max-w-3xl mx-auto text-center mb-12">
+        <h1 class="text-4xl md:text-5xl font-bold leading-tighter tracking-tighter mb-4 font-heading">
+          Research Projects
+        </h1>
+        <p class="text-xl text-gray-600 dark:text-slate-400">
+          Explore our cutting-edge research projects in fluid dynamics and engineering innovation.
+        </p>
+      </div>
+      <div class="grid gap-6 row-gap-5 md:grid-cols-2 lg:grid-cols-3 items-center">
+        {projects.map((project) => (
+          <div class="flex flex-col h-full p-6 bg-white dark:bg-slate-900 shadow-lg rounded-lg">
+            <div class="relative h-48 mb-4">
+              <img
+                src={project.image}
+                alt={project.title}
+                class="w-full h-full object-cover rounded-lg"
+              />
+              <div class="absolute top-4 right-4">
+                <span class="px-3 py-1 text-sm font-semibold text-white bg-blue-600 rounded-full">
+                  {project.status}
+                </span>
+              </div>
+            </div>
+            <h3 class="text-xl font-bold leading-snug mb-2 font-heading">{project.title}</h3>
+            <p class="text-gray-600 dark:text-slate-400 mb-4">{project.description}</p>
+            <div class="mt-auto">
+              <h4 class="text-sm font-semibold mb-2">Research Team:</h4>
+              <ul class="text-sm text-gray-600 dark:text-slate-400">
+                {project.team.map((member) => (
+                  <li>{member}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  </main>
+  <Footer {...footerData} />
+</Layout> 

@@ -1,6 +1,6 @@
 site:
-  name: AstroWind
-  site: 'https://astrowind.vercel.app'
+  name: Fluid Innovation Lab
+  site: 'https://fluidinnovationlab.vercel.app'
   base: '/'
   trailingSlash: false
 
@@ -9,22 +9,22 @@ site:
 # Default SEO metadata
 metadata:
   title:
-    default: AstroWind
-    template: '%s — AstroWind'
-  description: "\U0001F680 Suitable for Startups, Small Business, Sass Websites, Professional Portfolios, Marketing Websites, Landing Pages & Blogs."
+    default: Fluid Innovation Lab
+    template: '%s — Fluid Innovation Lab'
+  description: "Welcome to the Fluid Innovation Lab - Advancing research in fluid dynamics, innovation, and engineering solutions for tomorrow's challenges."
   robots:
     index: true
     follow: true
   openGraph:
-    site_name: AstroWind
+    site_name: Fluid Innovation Lab
     images:
       - url: '~/assets/images/default.png'
         width: 1200
         height: 628
     type: website
   twitter:
-    handle: '@onwidget'
-    site: '@onwidget'
+    handle: '@fluidinnovationlab'
+    site: '@fluidinnovationlab'
     cardType: summary_large_image
 
 i18n:
