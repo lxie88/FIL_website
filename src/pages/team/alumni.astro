@@ -1,0 +1,60 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Header from '~/components/widgets/Header.astro';
+import Footer from '~/components/widgets/Footer.astro';
+import { headerData, footerData } from '~/navigation';
+
+const metadata = {
+  title: 'Alumni',
+  description: 'Meet our distinguished alumni who have contributed to our research and moved on to new endeavors.',
+};
+
+const alumni = [
+  {
+    name: 'Dr. John Doe',
+    title: 'Former Researcher',
+    image: 'https://example.com/image1.jpg',
+    bio: 'Now working at XYZ Corporation.',
+  },
+  {
+    name: 'Dr. Jane Smith',
+    title: 'Former Postdoc',
+    image: 'https://example.com/image2.jpg',
+    bio: 'Currently a professor at ABC University.',
+  },
+  // Add more alumni here
+];
+---
+
+<Layout metadata={metadata}>
+  <Header {...headerData} />
+  <main>
+    <section class="px-4 py-16 sm:px-6 mx-auto lg:px-8 lg:py-20 max-w-7xl">
+      <div class="max-w-3xl mx-auto text-center mb-12">
+        <h1 class="text-4xl md:text-5xl font-bold leading-tighter tracking-tighter mb-4 font-heading">
+          Alumni
+        </h1>
+        <p class="text-xl text-gray-600 dark:text-slate-400">
+          Meet our distinguished alumni who have contributed to our research and moved on to new endeavors.
+        </p>
+      </div>
+      <div class="grid gap-6 row-gap-5 md:grid-cols-2 lg:grid-cols-3 items-center">
+        {alumni.map((member) => (
+          <div class="flex flex-col h-full p-6 bg-white dark:bg-slate-900 shadow-lg rounded-lg">
+            <div class="relative h-64 mb-4">
+              <img
+                src={member.image}
+                alt={member.name}
+                class="w-full h-full object-cover rounded-lg"
+              />
+            </div>
+            <h3 class="text-xl font-bold leading-snug mb-2 font-heading">{member.name}</h3>
+            <p class="text-blue-600 dark:text-blue-400 mb-2">{member.title}</p>
+            <p class="text-gray-600 dark:text-slate-400 mb-4">{member.bio}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  </main>
+  <Footer {...footerData} />
+</Layout> 
