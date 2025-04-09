@@ -113,7 +113,7 @@ export const footerData = {
   socialLinks: [
     { ariaLabel: 'X', icon: 'tabler:brand-x', href: '#' },
     { ariaLabel: 'LinkedIn', icon: 'tabler:brand-linkedin', href: '#' },
-    { ariaLabel: 'Google Scholar', icon: 'tabler:school', href: '#' },
+    { ariaLabel: 'Google Scholar', icon: 'tabler:book', href: '#' },
     { ariaLabel: 'Github', icon: 'tabler:brand-github', href: '#' },
   ],
   footNote: `

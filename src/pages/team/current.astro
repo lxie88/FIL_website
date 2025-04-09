@@ -15,6 +15,7 @@ const currentMembers = [
     bio: 'Expert in fluid dynamics and innovation with numerous publications.',
     email: 'huang.chen@unlv.edu',
     linkedin: 'https://www.linkedin.com/in/huang-chen-2019/',
+    scholar: 'https://scholar.google.com/citations?user=JFecTysAAAAJ&hl=en',
   },
   {
     name: 'Siquan Huo',
@@ -78,13 +79,12 @@ const currentMembers = [
     image: '/team/songdong.jpeg',
     bio: ' Dong is an undergraduate Mechanical Engineering student at UNLV, originally from South Korea. He is currently assisting Daniel Gadelata in analyzing neutron flux distribution using OpenMC, with the goal of improving the energy efficiency of the CNTP core design. Outside of academics and research, he enjoys playing baseball in his free time.',
     email: 'songd1@unlv.nevada.edu',
-    linkedin: 'https://www.linkedin.com/in/dong-song-123456789/',
   },
   {
     name: 'Miguel Vasco-Torres',
     title: 'Undergraduate Student',
     image: '/team/miguel.jpeg',
-    bio: 'Miguel is an undergraduate student majoring in Mechanical Engineering at UNLV. He is currently working on the controls and data acquisition system for a flow loop designed to test blood pumps..',
+    bio: 'Miguel is an undergraduate student majoring in Mechanical Engineering at UNLV. He is currently working on the controls and data acquisition system for a flow loop designed to test blood pumps.',
     email: 'torrem27@unlv.nevada.edu',
     linkedin: 'https://www.linkedin.com/in/miguel-torres-568b04272/',
   },
@@ -92,6 +92,96 @@ const currentMembers = [
 ---
 
 <Layout metadata={metadata}>
+  <script>
+    function handleEmailClick(email) {
+      // Create and show a popup dialog
+      const dialog = document.createElement('div');
+      dialog.style.cssText = `
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        min-width: 300px;
+        text-align: center;
+      `;
+      
+      // Add email display
+      const emailText = document.createElement('p');
+      emailText.textContent = email;
+      emailText.style.cssText = `
+        margin: 10px 0;
+        padding: 8px;
+        background: #f0f0f0;
+        border-radius: 4px;
+        font-family: monospace;
+      `;
+      
+      // Add copy button
+      const copyButton = document.createElement('button');
+      copyButton.textContent = 'Copy to Clipboard';
+      copyButton.style.cssText = `
+        background: #3b82f6;
+        color: white;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 4px;
+        margin: 10px;
+        cursor: pointer;
+      `;
+      copyButton.onclick = () => {
+        navigator.clipboard.writeText(email);
+        copyButton.textContent = 'Copied!';
+        setTimeout(() => {
+          copyButton.textContent = 'Copy to Clipboard';
+        }, 2000);
+      };
+      
+      // Add close button
+      const closeButton = document.createElement('button');
+      closeButton.textContent = 'Close';
+      closeButton.style.cssText = `
+        background: #e5e7eb;
+        color: #374151;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 4px;
+        margin: 10px;
+        cursor: pointer;
+      `;
+      closeButton.onclick = () => {
+        document.body.removeChild(dialog);
+        document.body.removeChild(overlay);
+      };
+      
+      // Add overlay
+      const overlay = document.createElement('div');
+      overlay.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+      `;
+      overlay.onclick = () => {
+        document.body.removeChild(dialog);
+        document.body.removeChild(overlay);
+      };
+      
+      // Assemble and show the dialog
+      dialog.appendChild(emailText);
+      dialog.appendChild(copyButton);
+      dialog.appendChild(closeButton);
+      document.body.appendChild(overlay);
+      document.body.appendChild(dialog);
+    }
+  </script>
   <main>
     <section class="px-4 py-16 sm:px-6 mx-auto lg:px-8 lg:py-20 max-w-7xl">
       <div class="max-w-3xl mx-auto text-center mb-16">
@@ -124,25 +214,39 @@ const currentMembers = [
               <div class="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-white dark:from-slate-900 to-transparent group-hover:opacity-0 transition-opacity duration-300"></div>
             </div>
             <div class="flex justify-center mt-6 space-x-4">
-              <a 
-                href={`mailto:${member.email}`} 
+              <button 
+                onclick={`handleEmailClick('${member.email}')`}
                 class="text-blue-500 hover:text-blue-700 flex items-center transition-colors duration-300 hover:scale-110"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
                 <span class="text-sm">Email</span>
-              </a>
-              <a 
-                href={member.linkedin} 
-                target="_blank" 
-                class="text-blue-500 hover:text-blue-700 flex items-center transition-colors duration-300 hover:scale-110"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-                </svg>
-                <span class="text-sm">LinkedIn</span>
-              </a>
+              </button>
+              {member.linkedin && (
+                <a 
+                  href={member.linkedin} 
+                  target="_blank" 
+                  class="text-blue-500 hover:text-blue-700 flex items-center transition-colors duration-300 hover:scale-110"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                  </svg>
+                  <span class="text-sm">LinkedIn</span>
+                </a>
+              )}
+              {member.scholar && (
+                <a 
+                  href={member.scholar} 
+                  target="_blank" 
+                  class="text-blue-500 hover:text-blue-700 flex items-center transition-colors duration-300 hover:scale-110"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm0 22c-5.514 0-10-4.486-10-10s4.486-10 10-10 10 4.486 10 10-4.486 10-10 10zm1-17h-2v8h2v-8zm0 10h-2v2h2v-2z"/>
+                  </svg>
+                  <span class="text-sm">Scholar</span>
+                </a>
+              )}
             </div>
           </div>
         ))}
