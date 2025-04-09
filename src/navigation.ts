@@ -28,7 +28,7 @@ export const headerData = {
       links: [
         {
           text: 'Current Members',
-          href: getPermalink('/team/current-members'),
+          href: getPermalink('/team/current'),
         },
         {
           text: 'Alumni',
