@@ -103,17 +103,28 @@ const currentMembers = [
         
         // Show popup on button click
         button.addEventListener('click', function(e) {
+          e.preventDefault();
           e.stopPropagation();
+          
           // Hide all other popups first
           document.querySelectorAll('.email-popup').forEach(p => {
             if (p !== popup) p.classList.add('hidden');
           });
+          
+          // Toggle the current popup
           popup.classList.toggle('hidden');
         });
         
         // Hide popup when mouse leaves the popup area
         popup.addEventListener('mouseleave', function() {
           popup.classList.add('hidden');
+        });
+        
+        // Also hide popup when clicking outside
+        document.addEventListener('click', function(e) {
+          if (!popup.contains(e.target) && !button.contains(e.target)) {
+            popup.classList.add('hidden');
+          }
         });
       });
     });
@@ -161,7 +172,9 @@ const currentMembers = [
                 </button>
                 <div class="email-popup hidden absolute z-10 mt-2 w-64 bg-white dark:bg-slate-800 rounded-lg shadow-lg p-4 border border-gray-200 dark:border-gray-700">
                   <div class="flex flex-col items-center">
-                    <p class="text-sm font-mono bg-gray-100 dark:bg-gray-700 p-2 rounded w-full text-center">{member.email}</p>
+                    <a href={`mailto:${member.email}`} class="text-sm font-mono bg-gray-100 dark:bg-gray-700 p-2 rounded w-full text-center hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors duration-300">
+                      {member.email}
+                    </a>
                   </div>
                 </div>
               </div>
