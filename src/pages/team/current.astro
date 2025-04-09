@@ -93,94 +93,19 @@ const currentMembers = [
 
 <Layout metadata={metadata}>
   <script>
-    function handleEmailClick(email) {
-      // Create and show a popup dialog
-      const dialog = document.createElement('div');
-      dialog.style.cssText = `
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background: white;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        z-index: 1000;
-        min-width: 300px;
-        text-align: center;
-      `;
-      
-      // Add email display
-      const emailText = document.createElement('p');
-      emailText.textContent = email;
-      emailText.style.cssText = `
-        margin: 10px 0;
-        padding: 8px;
-        background: #f0f0f0;
-        border-radius: 4px;
-        font-family: monospace;
-      `;
-      
-      // Add copy button
-      const copyButton = document.createElement('button');
-      copyButton.textContent = 'Copy to Clipboard';
-      copyButton.style.cssText = `
-        background: #3b82f6;
-        color: white;
-        padding: 8px 16px;
-        border: none;
-        border-radius: 4px;
-        margin: 10px;
-        cursor: pointer;
-      `;
-      copyButton.onclick = () => {
-        navigator.clipboard.writeText(email);
-        copyButton.textContent = 'Copied!';
-        setTimeout(() => {
-          copyButton.textContent = 'Copy to Clipboard';
-        }, 2000);
-      };
-      
-      // Add close button
-      const closeButton = document.createElement('button');
-      closeButton.textContent = 'Close';
-      closeButton.style.cssText = `
-        background: #e5e7eb;
-        color: #374151;
-        padding: 8px 16px;
-        border: none;
-        border-radius: 4px;
-        margin: 10px;
-        cursor: pointer;
-      `;
-      closeButton.onclick = () => {
-        document.body.removeChild(dialog);
-        document.body.removeChild(overlay);
-      };
-      
-      // Add overlay
-      const overlay = document.createElement('div');
-      overlay.style.cssText = `
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: 999;
-      `;
-      overlay.onclick = () => {
-        document.body.removeChild(dialog);
-        document.body.removeChild(overlay);
-      };
-      
-      // Assemble and show the dialog
-      dialog.appendChild(emailText);
-      dialog.appendChild(copyButton);
-      dialog.appendChild(closeButton);
-      document.body.appendChild(overlay);
-      document.body.appendChild(dialog);
-    }
+    // Add event listener to close email popups when clicking outside
+    document.addEventListener('DOMContentLoaded', function() {
+      // Close all popups when clicking anywhere on the document
+      document.addEventListener('click', function(event) {
+        // Check if the click is not on an email button or popup
+        if (!event.target.closest('.email-button') && !event.target.closest('.email-popup')) {
+          // Hide all email popups
+          document.querySelectorAll('.email-popup').forEach(popup => {
+            popup.classList.add('hidden');
+          });
+        }
+      });
+    });
   </script>
   <main>
     <section class="px-4 py-16 sm:px-6 mx-auto lg:px-8 lg:py-20 max-w-7xl">
@@ -214,15 +139,22 @@ const currentMembers = [
               <div class="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-white dark:from-slate-900 to-transparent group-hover:opacity-0 transition-opacity duration-300"></div>
             </div>
             <div class="flex justify-center mt-6 space-x-4">
-              <button 
-                onclick={`handleEmailClick('${member.email}')`}
-                class="text-blue-500 hover:text-blue-700 flex items-center transition-colors duration-300 hover:scale-110"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
-                <span class="text-sm">Email</span>
-              </button>
+              <div class="relative group">
+                <button 
+                  class="email-button text-blue-500 hover:text-blue-700 flex items-center transition-colors duration-300 hover:scale-110"
+                  onclick={`document.getElementById('email-popup-${member.name.replace(/\s+/g, '-').toLowerCase()}').classList.toggle('hidden')`}
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                  <span class="text-sm">Email</span>
+                </button>
+                <div id={`email-popup-${member.name.replace(/\s+/g, '-').toLowerCase()}`} class="email-popup hidden absolute z-10 mt-2 w-64 bg-white dark:bg-slate-800 rounded-lg shadow-lg p-4 border border-gray-200 dark:border-gray-700">
+                  <div class="flex flex-col items-center">
+                    <p class="text-sm font-mono bg-gray-100 dark:bg-gray-700 p-2 rounded w-full text-center">{member.email}</p>
+                  </div>
+                </div>
+              </div>
               {member.linkedin && (
                 <a 
                   href={member.linkedin} 
