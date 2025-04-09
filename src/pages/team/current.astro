@@ -93,17 +93,28 @@ const currentMembers = [
 
 <Layout metadata={metadata}>
   <script>
-    // Add event listener to close email popups when clicking outside
+    // Add event listener to handle email popup visibility
     document.addEventListener('DOMContentLoaded', function() {
-      // Close all popups when clicking anywhere on the document
-      document.addEventListener('click', function(event) {
-        // Check if the click is not on an email button or popup
-        if (!event.target.closest('.email-button') && !event.target.closest('.email-popup')) {
-          // Hide all email popups
-          document.querySelectorAll('.email-popup').forEach(popup => {
-            popup.classList.add('hidden');
+      // Get all email buttons
+      const emailButtons = document.querySelectorAll('.email-button');
+      
+      emailButtons.forEach(button => {
+        const popup = button.nextElementSibling;
+        
+        // Show popup on button click
+        button.addEventListener('click', function(e) {
+          e.stopPropagation();
+          // Hide all other popups first
+          document.querySelectorAll('.email-popup').forEach(p => {
+            if (p !== popup) p.classList.add('hidden');
           });
-        }
+          popup.classList.toggle('hidden');
+        });
+        
+        // Hide popup when mouse leaves the popup area
+        popup.addEventListener('mouseleave', function() {
+          popup.classList.add('hidden');
+        });
       });
     });
   </script>
@@ -142,14 +153,13 @@ const currentMembers = [
               <div class="relative group">
                 <button 
                   class="email-button text-blue-500 hover:text-blue-700 flex items-center transition-colors duration-300 hover:scale-110"
-                  onclick={`document.getElementById('email-popup-${member.name.replace(/\s+/g, '-').toLowerCase()}').classList.toggle('hidden')`}
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
                   <span class="text-sm">Email</span>
                 </button>
-                <div id={`email-popup-${member.name.replace(/\s+/g, '-').toLowerCase()}`} class="email-popup hidden absolute z-10 mt-2 w-64 bg-white dark:bg-slate-800 rounded-lg shadow-lg p-4 border border-gray-200 dark:border-gray-700">
+                <div class="email-popup hidden absolute z-10 mt-2 w-64 bg-white dark:bg-slate-800 rounded-lg shadow-lg p-4 border border-gray-200 dark:border-gray-700">
                   <div class="flex flex-col items-center">
                     <p class="text-sm font-mono bg-gray-100 dark:bg-gray-700 p-2 rounded w-full text-center">{member.email}</p>
                   </div>
