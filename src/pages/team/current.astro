@@ -6,14 +6,85 @@ const metadata = {
 
 const currentMembers = [
   {
-    name: 'Dr. Sarah Smith',
-    title: 'Professor & Lab Director',
-    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1976&q=80',
-    bio: 'Leading expert in computational fluid dynamics with over 20 years of research experience.',
-    email: 'sarah.smith@university.edu',
-    research: ['Computational Fluid Dynamics', 'Numerical Methods', 'Flow Optimization'],
+    name: 'Dr. Huang Chen',
+    title: 'Principal Investigator',
+    image: 'https://example.com/image-huang.jpg',
+    bio: 'Expert in fluid dynamics and innovation with numerous publications.',
+    email: 'huang.chen@university.edu',
+    linkedin: 'https://linkedin.com/in/huangchen',
   },
-  // Add more current members here
+  {
+    name: 'Siquan Huo',
+    title: 'Ph.D. Student',
+    image: 'https://example.com/image-siquan.jpg',
+    bio: 'Researching advanced computational methods in fluid dynamics.',
+    email: 'siquan.huo@university.edu',
+    linkedin: 'https://linkedin.com/in/siquanhuo',
+  },
+  {
+    name: 'Akash Shivlal Shahu',
+    title: 'Ph.D. Student',
+    image: 'https://example.com/image-akash.jpg',
+    bio: 'Focuses on numerical simulations and optimization techniques.',
+    email: 'akash.shahu@university.edu',
+    linkedin: 'https://linkedin.com/in/akashshahu',
+  },
+  {
+    name: 'Jaylen Leonard',
+    title: 'Master Student',
+    image: 'https://example.com/image-jaylen.jpg',
+    bio: 'Investigating fluid-structure interactions in engineering systems.',
+    email: 'jaylen.leonard@university.edu',
+    linkedin: 'https://linkedin.com/in/jaylenleonard',
+  },
+  {
+    name: 'Isabella Stanley',
+    title: 'Master Student',
+    image: 'https://example.com/image-isabella.jpg',
+    bio: 'Specializes in experimental fluid mechanics and data analysis.',
+    email: 'isabella.stanley@university.edu',
+    linkedin: 'https://linkedin.com/in/isabellastanley',
+  },
+  {
+    name: 'Jerome Ariola',
+    title: 'Undergraduate Student',
+    image: 'https://example.com/image-jerome.jpg',
+    bio: 'Assists in lab experiments and data collection.',
+    email: 'jerome.ariola@university.edu',
+    linkedin: 'https://linkedin.com/in/jeromeariola',
+  },
+  {
+    name: 'Daniel Gadaleta',
+    title: 'Undergraduate Student',
+    image: 'https://example.com/image-daniel.jpg',
+    bio: 'Focuses on computational modeling and simulations.',
+    email: 'daniel.gadaleta@university.edu',
+    linkedin: 'https://linkedin.com/in/danielgadaleta',
+  },
+  {
+    name: 'Thomas Miller',
+    title: 'Undergraduate Student',
+    image: 'https://example.com/image-thomas.jpg',
+    bio: 'Engaged in research on fluid dynamics applications.',
+    email: 'thomas.miller@university.edu',
+    linkedin: 'https://linkedin.com/in/thomasmiller',
+  },
+  {
+    name: 'Dong Song',
+    title: 'Undergraduate Student',
+    image: 'https://example.com/image-dong.jpg',
+    bio: 'Works on data analysis and visualization projects.',
+    email: 'dong.song@university.edu',
+    linkedin: 'https://linkedin.com/in/dongsong',
+  },
+  {
+    name: 'Miguel Vasco-Torres',
+    title: 'Undergraduate Student',
+    image: 'https://example.com/image-miguel.jpg',
+    bio: 'Contributes to experimental setups and testing.',
+    email: 'miguel.vasco@university.edu',
+    linkedin: 'https://linkedin.com/in/miguelvasco',
+  },
 ];
 ---
 
@@ -37,12 +108,8 @@ const currentMembers = [
               <h3>{member.name}</h3>
               <p>{member.title}</p>
               <p>{member.bio}</p>
-              <ul>
-                {member.research.map((area) => (
-                  <li>{area}</li>
-                ))}
-              </ul>
               <a href={`mailto:${member.email}`}>{member.email}</a>
+              <a href={member.linkedin} target="_blank">LinkedIn</a>
             </div>
           ))}
         </div>
