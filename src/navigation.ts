@@ -83,7 +83,7 @@ export const footerData = {
     {
       title: 'Team',
       links: [
-        { text: 'Faculty', href: getPermalink('/team/currentmembers') },
+        { text: 'Current Members', href: getPermalink('/team/currentmembers') },
         { text: 'Alumni', href: getPermalink('/team/alumni') },
       ],
     },
