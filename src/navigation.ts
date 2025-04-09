@@ -14,12 +14,8 @@ export const headerData = {
           href: getPermalink('/research/publications'),
         },
         {
-          text: 'Research Areas',
-          href: getPermalink('/research/areas'),
-        },
-        {
-          text: 'Lab Equipment',
-          href: getPermalink('/research/equipment'),
+          text: 'Lab Resources',
+          href: getPermalink('/resources/lab'),
         },
       ],
     },
@@ -37,23 +33,15 @@ export const headerData = {
       ],
     },
     {
-      text: 'Resources',
+      text: 'Teaching & Outreach',
       links: [
         {
-          text: 'Lab Resources',
-          href: getPermalink('/resources/lab'),
+          text: 'Teaching',
+          href: getPermalink('/teaching'),
         },
         {
-          text: 'Publications',
-          href: getPermalink('/resources/publications'),
-        },
-        {
-          text: 'Data Repository',
-          href: getPermalink('/resources/data'),
-        },
-        {
-          text: 'Code Repository',
-          href: getPermalink('/resources/code'),
+          text: 'Outreach',
+          href: getPermalink('/outreach'),
         },
       ],
     },
@@ -76,8 +64,7 @@ export const footerData = {
       links: [
         { text: 'Current Projects', href: getPermalink('/research/projects') },
         { text: 'Publications', href: getPermalink('/research/publications') },
-        { text: 'Research Areas', href: getPermalink('/research/areas') },
-        { text: 'Lab Equipment', href: getPermalink('/research/equipment') },
+        { text: 'Lab Resources', href: getPermalink('/resources/lab') },
       ],
     },
     {
@@ -88,12 +75,10 @@ export const footerData = {
       ],
     },
     {
-      title: 'Resources',
+      title: 'Teaching & Outreach',
       links: [
-        { text: 'Lab Resources', href: getPermalink('/resources/lab') },
-        { text: 'Publications', href: getPermalink('/resources/publications') },
-        { text: 'Data Repository', href: getPermalink('/resources/data') },
-        { text: 'Code Repository', href: getPermalink('/resources/code') },
+        { text: 'Teaching', href: getPermalink('/teaching') },
+        { text: 'Outreach', href: getPermalink('/outreach') },
       ],
     },
     {
@@ -114,7 +99,7 @@ export const footerData = {
     { ariaLabel: 'X', icon: 'tabler:brand-x', href: '#' },
     { ariaLabel: 'LinkedIn', icon: 'tabler:brand-linkedin', href: '#' },
     { ariaLabel: 'Google Scholar', icon: 'tabler:book', href: '#' },
-    { ariaLabel: 'Github', icon: 'tabler:brand-github', href: '#' },
+    { ariaLabel: 'Github', icon: 'tabler:brand-github', href: 'https://github.com/fluidinnovationlab' },
   ],
   footNote: `
     <span class="text-sm">© ${new Date().getFullYear()} Fluid Innovation Lab. All rights reserved.</span>
