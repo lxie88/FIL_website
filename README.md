@@ -53,33 +53,8 @@ This website is built using:
    npm run build
    ```
 
-## 📝 Content Management
-
-- News posts are stored in `src/content/post/`
-- Teaching materials are in `src/content/teaching/`
-- Research projects are in `src/content/research/`
-
-## 🎓 Courses
-
-We offer several courses in fluid dynamics and related fields:
-- ME 480/680: Gas Dynamics
-- ME 482/682: Aerodynamics
-- ME 702: Computational Fluid Dynamics
-
-## 🤝 Contributing
-
-If you're a member of the Fluid Innovation Lab and would like to contribute to the website:
-1. Create a new branch for your changes
-2. Make your modifications
-3. Submit a pull request for review
-
-## 📞 Contact
-
-For more information about our research or to inquire about graduate student positions:
-- Email: [Your Email]
-- Phone: [Your Phone]
-- Location: [Your Lab Location]
-
 ## 📄 License
 
 This website is built on the AstroWind template and is licensed under the MIT License.
+
+This is the website I help build for Fluid Innovation Lab @ UNLV. 
