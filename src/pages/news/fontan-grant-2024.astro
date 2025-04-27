@@ -1,0 +1,127 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import { Icon } from 'astro-icon/components';
+
+const metadata = {
+  title: 'Fontan Circulation Support Device Grant - Fluid Innovation Lab',
+  description: 'Our team has been awarded funding to develop a novel mechanical circulatory device for failing Fontan circulation using aerospace-inspired technology.',
+  ignoreTitleTemplate: true,
+};
+
+// Grant details
+const grantDetails = {
+  title: 'Mechanically Assisted Establishment of Biventricular Physiology for Failing Fontan Circulation',
+  date: 'August 5, 2024',
+  funding: 'Additional Ventures',
+  duration: '3 years',
+  category: 'Grant',
+  categoryColor: 'bg-cyan-100 text-cyan-800 dark:bg-cyan-900 dark:text-cyan-200',
+};
+---
+
+<Layout metadata={metadata}>
+  <section class="px-4 py-16 sm:px-6 mx-auto lg:px-8 lg:py-20 max-w-7xl">
+    <div class="max-w-3xl mx-auto">
+      <!-- Back to News Link -->
+      <a href="/news" class="inline-flex items-center text-primary-600 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-300 mb-8">
+        <Icon name="tabler:arrow-left" class="w-4 h-4 mr-1" />
+        Back to News
+      </a>
+
+      <!-- Article Header -->
+      <header class="mb-12">
+        <div class="flex items-center gap-4 mb-4">
+          <span class={`inline-block px-3 py-1 rounded-full text-sm font-semibold ${grantDetails.categoryColor}`}>
+            {grantDetails.category}
+          </span>
+          <span class="text-sm text-muted dark:text-slate-400 flex items-center">
+            <Icon name="tabler:calendar" class="w-4 h-4 mr-1" />
+            {grantDetails.date}
+          </span>
+        </div>
+        <div class="flex items-center justify-between mb-4">
+          <h1 class="text-4xl md:text-5xl font-bold leading-tighter tracking-tighter font-heading bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400">
+            {grantDetails.title}
+          </h1>
+          <div class="w-24 h-24 flex-shrink-0 rounded-lg bg-slate-100 dark:bg-transparent p-2 flex items-center justify-center">
+            <img 
+              src="/images/news/fontonlogo.png" 
+              alt="Fonton Logo" 
+              class="w-full h-full object-contain"
+            />
+          </div>
+        </div>
+        <div class="flex flex-wrap gap-4 text-muted dark:text-slate-400">
+          <span class="flex items-center">
+            <Icon name="tabler:award" class="w-4 h-4 mr-1" />
+            {grantDetails.funding}
+          </span>
+          <span class="flex items-center">
+            <Icon name="tabler:clock" class="w-4 h-4 mr-1" />
+            Duration: {grantDetails.duration}
+          </span>
+        </div>
+      </header>
+
+      <!-- Main Content -->
+      <article class="prose prose-lg dark:prose-invert max-w-none">
+        <p>
+          Excited to announce that our proposal titled "Mechanically Assisted Establishment of Biventricular Physiology for Failing Fontan Circulation" has been recommended for funding! We will develop a novel mechanical circulatory device to support failing Fontan patients during this three-year project. We will use advanced virtual surgery techniques combined with CFD and experiments to optimize the design. Dr. Iki Adachi of Baylor College of Medicine is the PI.
+        </p>
+
+        <h2>Research Team</h2>
+        <p>
+          Led by Principal Investigator and renowned surgeon Dr. Iki Adachi (BCM/TCH), and a talented team of researchers including Dr. Nobuyuki Kurita (BCM/TCH), Dr. Chris Broda (BCM/TCH), Dr. Yaxin Wang (THI), Dr. Chris Chan (THI), and Dr. Huang Chen (UNLV) the team was recognized for their work on a novel implantable device called "ReVolution." This advanced pump is specifically designed for infants with congenital heart disease who have undergone the Fontan procedure. Unlike traditional approaches that merely support the failing Fontan circulation, the ReVolution pump establishes a "biventricular" circulation, making it adaptable to a variety of different anatomies.
+        </p>
+
+        <h2>Technical Approach</h2>
+        <p>
+          Mechanical circulatory supports designed for failed Fontan circulation require high flow rates (>5L/min) but low pressure rises (&lt;15mmHg). This requirement significantly differs from those for left ventricular assist devices (LVADs), which operate at a much higher pressure rise. The off-label use of LVADs for Fontan patients puts the pump under a severely off-design condition, increasing the possibility of complications.
+        </p>
+
+        <p>
+          In this project, we proposed a novel design inspired by aerospace technology, which uses a rotating array of thin airfoils to achieve a high flow rate with a relatively low-pressure rise. This innovative pump will be further optimized to reduce the hemolytic risk and provide long-term support. The optimization will utilize advanced computational fluid dynamics simulations and a virtual surgery technique that integrates the pump with patient-specific anatomy and hemodynamics data.
+        </p>
+      </article>
+
+      <!-- Social Sharing -->
+      <div class="border-t border-slate-200 dark:border-slate-700 mt-12 pt-8">
+        <h3 class="text-lg font-bold mb-4">Share this article</h3>
+        <div class="flex gap-4">
+          <a
+            href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
+              grantDetails.title
+            )}&url=${encodeURIComponent(
+              `https://fluidinnovationlab.com/news/fontan-grant-2024`
+            )}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-muted hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+          >
+            <Icon name="tabler:brand-twitter" class="w-6 h-6" />
+          </a>
+          <a
+            href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
+              `https://fluidinnovationlab.com/news/fontan-grant-2024`
+            )}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-muted hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+          >
+            <Icon name="tabler:brand-linkedin" class="w-6 h-6" />
+          </a>
+          <a
+            href={`mailto:?subject=${encodeURIComponent(
+              grantDetails.title
+            )}&body=${encodeURIComponent(
+              `Check out this grant announcement: https://fluidinnovationlab.com/news/fontan-grant-2024`
+            )}`}
+            class="text-muted hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+          >
+            <Icon name="tabler:mail" class="w-6 h-6" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout> 

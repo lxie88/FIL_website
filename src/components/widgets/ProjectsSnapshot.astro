@@ -1,0 +1,108 @@
+---
+import WidgetWrapper from '../ui/WidgetWrapper.astro';
+import type { Widget } from '~/types';
+import Headline from '~/components/ui/Headline.astro';
+
+interface Props extends Widget {
+  title?: string;
+  subtitle?: string;
+  tagline?: string;
+  maxProjects?: number;
+}
+
+const {
+  title = await Astro.slots.render('title'),
+  subtitle = await Astro.slots.render('subtitle'),
+  tagline = await Astro.slots.render('tagline'),
+  maxProjects = 3,
+
+  id,
+  isDark = false,
+  classes = {},
+  bg = await Astro.slots.render('bg'),
+} = Astro.props;
+
+// Import projects data from the projects page
+const projects = [
+  {
+    title: 'Left Ventricular Assist Device (LVAD) Research',
+    excerpt: 'Research on optimizing LVAD design to minimize blood damage and improve patient outcomes.',
+    image: '/images/projects/1.png',
+    status: 'Ongoing',
+    link: '/research/projects/lvad-research',
+  },
+  {
+    title: 'Advanced Fluid Measurement Technique',
+    excerpt: 'Studying the flow past transcatheter aortic valves using time-resolved 3D particle tracking',
+    image: '/images/projects/4.png',
+    status: 'Ongoing',
+    link: '/research/projects/fluid-measurement',
+  },
+  {
+    title: 'Turbomachinery Research',
+    excerpt: 'Understanding extreme events in turbomachines through advanced imaging and flow control techniques.',
+    image: '/images/projects/7.png',
+    status: 'Ongoing',
+    link: '/research/projects/turbomachinery-research',
+  },
+];
+
+// Limit the number of projects to display
+const displayProjects = projects.slice(0, maxProjects);
+---
+
+<WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-6xl mx-auto ${classes?.container ?? ''}`} bg={bg}>
+  <div class="max-w-3xl mx-auto text-center mb-12">
+    <Headline
+      title={title}
+      subtitle={subtitle}
+      tagline={tagline}
+      classes={{
+        container: 'mb-0 md:mb-0',
+        title: 'text-4xl md:text-4xl font-bold tracking-tighter mb-4 font-heading',
+        subtitle: 'text-xl text-muted dark:text-slate-400',
+      }}
+    />
+  </div>
+  
+  <div class="grid gap-6 row-gap-5 md:grid-cols-2 lg:grid-cols-3 items-center">
+    {displayProjects.map((project) => (
+      <div class="group flex flex-col h-full p-6 bg-white dark:bg-slate-900 shadow-lg rounded-lg transition-all duration-300 hover:shadow-xl hover:scale-105">
+        <div class="relative h-48 mb-4 overflow-hidden rounded-lg">
+          <img
+            src={project.image}
+            alt={project.title}
+            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+          />
+          <div class="absolute top-4 right-4">
+            <span class="px-3 py-1 text-sm font-semibold text-white bg-blue-600 rounded-full">
+              {project.status}
+            </span>
+          </div>
+        </div>
+        <h3 class="text-xl font-bold leading-snug mb-2 font-heading">{project.title}</h3>
+        <p class="text-gray-600 dark:text-slate-400 mb-4 line-clamp-3">{project.excerpt}</p>
+        
+        <div class="mt-auto">
+          {project.link && (
+            <a href={project.link} class="mt-4 inline-flex items-center text-primary-600 dark:text-primary-400 font-medium hover:underline">
+              Read more
+              <svg class="w-4 h-4 ml-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </a>
+          )}
+        </div>
+      </div>
+    ))}
+  </div>
+  
+  <div class="text-center mt-10">
+    <a href="/research/projects" class="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-primary-600 border border-transparent rounded-md shadow-sm hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+      View All Projects
+      <svg class="w-4 h-4 ml-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+      </svg>
+    </a>
+  </div>
+</WidgetWrapper> 

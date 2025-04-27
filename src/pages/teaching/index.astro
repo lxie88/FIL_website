@@ -1,0 +1,70 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import { Icon } from 'astro-icon/components';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import Headline from '~/components/ui/Headline.astro';
+
+const metadata = {
+  title: 'Teaching - Fluid Innovation Lab',
+  description: 'Explore our teaching initiatives and educational resources at the Fluid Innovation Lab.',
+};
+---
+
+<Layout metadata={metadata}>
+  <WidgetWrapper id="teaching" containerClass="max-w-6xl mx-auto">
+    <Headline
+      title="Teaching Initiatives"
+      subtitle="Our commitment to education and knowledge sharing in fluid dynamics and engineering"
+    />
+    
+    <!-- Course Offerings -->
+    <div class="bg-white dark:bg-slate-800 rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow mb-12">
+      <div class="flex items-center mb-4">
+        <Icon name="tabler:book" class="w-8 h-8 text-primary mr-3" />
+        <h3 class="text-xl font-bold">Course Offerings</h3>
+      </div>
+      <p class="text-gray-600 dark:text-gray-300 mb-4">
+        Our lab members teach a variety of courses in fluid dynamics, aerodynamics, and computational methods.
+      </p>
+      <ul class="space-y-2 text-gray-600 dark:text-gray-300">
+        <li class="flex items-start">
+          <Icon name="tabler:check" class="w-5 h-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+          <span>ME 480/680: Gas Dynamics</span>
+        </li>
+        <li class="flex items-start">
+          <Icon name="tabler:check" class="w-5 h-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+          <span>ME 482/682: Aerodynamics</span>
+        </li>
+        <li class="flex items-start">
+          <Icon name="tabler:check" class="w-5 h-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+          <span>ME 702: Computational Fluid Dynamics</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Course Descriptions -->
+    <div class="bg-white dark:bg-slate-800 rounded-lg shadow-md p-8 mb-12">
+      <h2 class="text-2xl font-bold mb-6">Course Descriptions</h2>
+      <div class="space-y-8">
+        <div>
+          <h3 class="text-xl font-bold mb-2">ME 480/680: Gas Dynamics</h3>
+          <p class="text-gray-600 dark:text-gray-300">
+            Examines the basic concepts and theories associated with compressible fluid flow. Normal and oblique shocks, 1-D analysis, and method of characteristics discussed.
+          </p>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold mb-2">ME 482/682: Aerodynamics</h3>
+          <p class="text-gray-600 dark:text-gray-300">
+            Presents fluid flow concepts leading to the design of flow surfaces and passages to achieve optimum performance over the broadest range of significant parameters. Topics include lift/drag/momentum, low-speed airfoil analysis, finite wings, and supersonic airfoils.
+          </p>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold mb-2">ME 702: Computational Fluid Dynamics</h3>
+          <p class="text-gray-600 dark:text-gray-300">
+            Application of numerical methods to solve highly nonlinear equations of motion and energy associated with fluid dynamics. We will focus on finite difference methods. Other methods, including finite volume and finite element methods, will also be discussed.
+          </p>
+        </div>
+      </div>
+    </div>
+  </WidgetWrapper>
+</Layout> 

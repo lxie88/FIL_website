@@ -1,0 +1,88 @@
+---
+interface Props {
+  publications?: Array<{
+    title: string;
+    authors: string;
+    year: number;
+    journal: string;
+    volume?: string;
+    pages?: string;
+    doi?: string;
+    url?: string;
+    citations?: number;
+  }>;
+}
+
+const { publications = [] } = Astro.props;
+---
+
+<div class="publications-list">
+  {publications.length > 0 ? (
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+      {publications.map((pub, index) => (
+        <div class="publication-item bg-white dark:bg-slate-800 rounded-lg shadow-sm p-3 border-l-2 border-primary hover:shadow-md transition-all duration-300">
+          <div class="flex flex-col gap-1.5">
+            <div class="flex justify-between items-start">
+              <h3 class="text-base font-bold text-slate-800 dark:text-white line-clamp-2">{pub.title}</h3>
+              {pub.url && (
+                <a
+                  href={pub.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="btn btn-xs btn-outline-primary ml-2 flex-shrink-0 text-xs px-1.5 py-0.5"
+                >
+                  View
+                </a>
+              )}
+            </div>
+            <p class="text-slate-600 dark:text-slate-300 text-xs line-clamp-1">{pub.authors}</p>
+            <div class="flex flex-wrap items-center gap-1.5 text-xs">
+              <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 px-1.5 py-0.5 rounded-full">
+                {pub.journal}
+                {pub.volume && `, Vol. ${pub.volume}`}
+                {pub.pages && `, pp. ${pub.pages}`}
+              </span>
+              <span class="bg-primary/10 text-primary px-1.5 py-0.5 rounded-full">
+                {pub.year}
+              </span>
+              {pub.citations && (
+                <span class="bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 px-1.5 py-0.5 rounded-full">
+                  Citations: {pub.citations}
+                </span>
+              )}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  ) : (
+    <div class="text-center py-8 bg-white dark:bg-slate-800 rounded-lg shadow-sm p-6">
+      <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 mb-4">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-book text-primary" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+          <path d="M3 19a2 2 0 0 0 2 2h14a2 2 0 0 0 2 -2v-14a2 2 0 0 0 -2 -2h-14a2 2 0 0 0 -2 2v14"></path>
+          <path d="M3 9h18"></path>
+          <path d="M3 5h18"></path>
+        </svg>
+      </div>
+      <h2 class="text-xl font-bold mb-2 text-slate-800 dark:text-white">No Publications Yet</h2>
+      <p class="text-slate-600 dark:text-slate-400 text-sm">
+        We're working on adding publications to this page. Please check back soon.
+      </p>
+    </div>
+  )}
+</div>
+
+<style>
+  .publications-list {
+    min-height: 100px;
+  }
+  
+  .publication-item {
+    transition: all 0.3s ease;
+  }
+  
+  .publication-item:hover {
+    transform: translateY(-2px);
+  }
+</style> 

@@ -1,0 +1,97 @@
+import WidgetWrapper from '../ui/WidgetWrapper.astro';
+import type { Widget } from '~/types';
+import Headline from '~/components/ui/Headline.astro';
+import { Icon } from 'astro-icon/components';
+
+interface Props extends Widget {
+  title?: string;
+  subtitle?: string;
+  tagline?: string;
+  maxProjects?: number;
+}
+
+const {
+  title = await Astro.slots.render('title'),
+  subtitle = await Astro.slots.render('subtitle'),
+  tagline = await Astro.slots.render('tagline'),
+  maxProjects = 3,
+
+  id,
+  isDark = false,
+  classes = {},
+  bg = await Astro.slots.render('bg'),
+} = Astro.props;
+
+// Import projects data from the projects page
+const projects = [
+  {
+    title: 'Left Ventricular Assist Device (LVAD) Research',
+    excerpt: 'Research on optimizing LVAD design to minimize blood damage and improve patient outcomes.',
+    image: '/images/projects/1.png',
+    status: 'Ongoing',
+    link: '/research/projects/lvad-research',
+  },
+  {
+    title: 'Advanced Fluid Measurement Technique',
+    excerpt: 'Studying the flow past transcatheter aortic valves using time-resolved 3D particle tracking',
+    image: '/images/projects/4.png',
+    status: 'Ongoing',
+    link: '/research/projects/fluid-measurement',
+  },
+  {
+    title: 'Turbomachinery Research',
+    excerpt: 'Understanding extreme events in turbomachines through advanced imaging and flow control techniques.',
+    image: '/images/projects/7.png',
+    status: 'Ongoing',
+    link: '/research/projects/turbomachinery-research',
+  },
+];
+
+// Limit the number of projects to display
+const displayProjects = projects.slice(0, maxProjects);
+
+<WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-6xl mx-auto ${classes?.container ?? ''}`} bg={bg}>
+  <div class="max-w-3xl mx-auto text-center mb-12">
+    <Headline
+      title={title}
+      subtitle={subtitle}
+      tagline={tagline}
+      classes={{
+        container: 'mb-0 md:mb-0',
+        title: 'text-4xl md:text-4xl font-bold tracking-tighter mb-4 font-heading',
+        subtitle: 'text-xl text-muted dark:text-slate-400',
+      }}
+    />
+  </div>
+  
+  <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+    {displayProjects.map((project, index) => (
+      <div class={`${index === 0 ? 'md:col-span-7' : 'md:col-span-5'} group`}>
+        <a href={project.link} class="block h-full">
+          <div class="relative h-64 md:h-80 overflow-hidden rounded-xl shadow-lg">
+            <img
+              src={project.image}
+              alt={project.title}
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+            <div class="absolute bottom-0 left-0 p-6 text-white">
+              <span class="inline-block px-3 py-1 text-sm font-semibold bg-blue-600 rounded-full mb-3">
+                {project.status}
+              </span>
+              <h3 class="text-2xl font-bold mb-2">{project.title}</h3>
+              <p class="text-gray-200 line-clamp-2">{project.excerpt}</p>
+            </div>
+          </div>
+        </a>
+      </div>
+    ))}
+  </div>
+  
+  <div class="text-center mt-10">
+    <a href="/research/projects" class="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-primary-600 border border-transparent rounded-md shadow-sm hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+      View All Projects
+      <Icon name="tabler:arrow-right" class="w-4 h-4 ml-1" />
+    </a>
+  </div>
+</WidgetWrapper> 

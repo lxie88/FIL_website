@@ -1,0 +1,76 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import { Icon } from 'astro-icon/components';
+
+const metadata = {
+  title: 'Advanced Fluid Measurement Technique - Fluid Innovation Lab',
+  description: 'Studying the flow past transcatheter aortic valves using time-resolved 3D particle tracking',
+  ignoreTitleTemplate: true,
+};
+
+const project = {
+  title: 'Advanced Fluid Measurement Technique',
+  summary: 'Studying the flow past transcatheter aortic valves using time-resolved 3D particle tracking',
+  image: '/images/projects/4.png',
+  additionalImages: [
+    {
+      src: '/images/projects/5.png',
+      caption: 'Experiment Setup'
+    },
+    {
+      src: '/images/projects/6.png',
+      caption: '3D PTV measurement'
+    }
+  ],
+  content: `
+The performance of a transcatheter aortic valve (TAV) can be evaluated by analyzing the flow field downstream of the valve. However, three dimensional flow and pressure fields, and particle residence time, a quantity closely related to thrombosis risk, are challenging to obtain. This experimental study aims to provide a comprehensive 3D measurement of the flow field downstream of an Edwards SAPIEN 3 using time-resolved 3D particle tracking velocimetry (3D PTV) with Shake-the-Box (STB) algorithm. The valve was deployed in an idealized aorta model and tested in a left heart simulator under physiological conditions. Detailed 3D vortical structures, pressure distributions, and particle residence time were obtained by analyzing the 3D particle tracks. Results have shown large-scale retrograde flow entering the sinuses of the TAV at systole, reducing flow stasis there. However, the 3D particle tracks reveal that the retrograde flow has a high residence time and might have already experienced high shear stress near the main jet. Thus, by only focusing on the flow in the sinus region is not sufficient to evaluate the leaflet thrombosis risk, and the flow downstream of the valve should be taken into consideration. The unique perspectives offered by 3D PTV are important when evaluating the performance of the TAVs.
+  `
+};
+---
+
+<Layout metadata={metadata}>
+  <section class="px-4 py-16 sm:px-6 mx-auto lg:px-8 lg:py-20 max-w-7xl">
+    <div class="max-w-2xl mx-auto text-center mb-16">
+      <h1 class="text-4xl md:text-5xl font-bold leading-tighter tracking-tighter mb-4 font-heading bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400">
+        {project.title}
+      </h1>
+      <p class="text-xl text-muted dark:text-slate-400">
+        {project.summary}
+      </p>
+    </div>
+
+    <div class="max-w-4xl mx-auto">
+      <!-- Main Image -->
+      <div class="mb-12">
+        <img
+          src={project.image}
+          alt={project.title}
+          class="w-full h-auto rounded-lg shadow-lg"
+        />
+      </div>
+
+      <!-- Content -->
+      <div class="prose prose-lg dark:prose-invert mx-auto">
+        <p class="whitespace-pre-line">{project.content}</p>
+      </div>
+
+      <!-- Additional Images -->
+      <div class="mt-16">
+        <div class="grid md:grid-cols-2 gap-8">
+          {project.additionalImages.map((img, index) => (
+            <div class="overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:scale-105">
+              <img
+                src={img.src}
+                alt={`${project.title} - Visualization ${index + 2}`}
+                class="w-full h-auto"
+              />
+              <div class="p-4 bg-white dark:bg-slate-900">
+                <p class="text-center text-gray-700 dark:text-slate-300 font-medium">{img.caption}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout> 

@@ -11,6 +11,9 @@ import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import Stats from '~/components/widgets/Stats.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
+import ResearchSlideshow from '~/components/widgets/ResearchSlideshow.astro';
+import NewsTicker from '~/components/widgets/NewsTicker.astro';
+import FullScreenSlider from '~/components/widgets/FullScreenSlider.astro';
 
 const metadata = {
   title: 'Fluid Innovation Lab - Advancing Research in Fluid Dynamics',
@@ -19,145 +22,96 @@ const metadata = {
 ---
 
 <Layout metadata={metadata}>
-  <!-- Hero Widget ******************* -->
-  <Hero
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Join Our Lab',
-        href: '/join',
-        icon: 'tabler:user-plus',
-      },
-      { text: 'Our Research', href: '#research' },
-    ]}
-    image={{ src: '~/assets/images/hero-image.png', alt: 'Fluid Innovation Lab Research' }}
-  >
-    <Fragment slot="title">
-      Advancing the Frontiers of <span class="text-accent dark:text-white highlight">Fluid Dynamics</span> Research
-    </Fragment>
+  <!-- Full Screen Slider ******************* -->
+  <FullScreenSlider
+    title="Fluid Innovation Lab"
+    subtitle="Advancing the Frontiers of Fluid Dynamics Research"
+    tagline="Welcome"
+  />
 
-    <Fragment slot="subtitle">
-      <span class="hidden sm:inline">
-        The <span class="font-semibold">Fluid Innovation Lab</span> is at the forefront of fluid dynamics research, pushing the boundaries of innovation in engineering and science.
-      </span>
-      <span class="block mb-1 sm:hidden font-bold text-blue-600">Pioneering Research in Fluid Mechanics </span>
-      Join us in our mission to solve complex fluid dynamics challenges and develop innovative solutions for tomorrow's engeering question.
-    </Fragment>
-  </Hero>
-
-  <!-- Features Widget *************** -->
+  <!-- Features Widget ************** -->
   <Features
     id="research"
-    tagline="Research Areas"
-    title="Our Core Research Focus"
-    subtitle="Exploring the fundamental principles of fluid dynamics while developing practical applications for industry and society."
+    title="Research Focus"
+    subtitle="Our lab specializes in advanced fluid dynamics research with applications in biomedical engineering and aerospace."
     items={[
       {
+        title: 'Biomedical Fluid Dynamics',
+        description: 'Studying blood flow patterns and developing improved medical devices.',
+        icon: 'tabler:heart',
+      },
+      {
         title: 'Computational Fluid Dynamics',
-        description:
-          'Developing advanced numerical methods and simulations to model complex fluid behaviors and optimize engineering solutions.',
-        icon: 'tabler:device-laptop',
+        description: 'Using advanced numerical methods to simulate complex fluid flows.',
+        icon: 'tabler:calculator',
       },
       {
         title: 'Experimental Fluid Mechanics',
-        description:
-          'Conducting cutting-edge experiments and Advancing fluid measurement techniques to study complex fluid dynamic problems.',
+        description: 'Conducting laboratory experiments to validate theoretical models.',
         icon: 'tabler:test-pipe',
-      },
-      {
-        title: 'Turbomachinery Research',
-        description:
-          'Innovation for high effiency and low emission turbomachines.',
-        icon: 'tabler:chart-dots',
-      },
-      {
-        title: 'Medical Device Research',
-        description:
-          'Design and engineer heart valves and pumps that are safer, more efficient to improve patient outcomes. ',
-        icon: 'tabler:heart-rate-monitor',
-      },
-      {
-        title: 'Complex Flow Research',
-        description:
-          'Tracking difficult fluid mechanics problems from cavitation to turbulence. ',
-        icon: 'tabler:wave-sine',
       },
     ]}
   />
 
-  <!-- Content Widget **************** -->
-  <Content
-    isReversed
-    tagline="Our Approach"
-    title="Innovation Through Research Excellence"
+  <!-- Current Projects Widget ************** -->
+  <Features2
+    title="Current Projects"
+    subtitle="Explore our ongoing research initiatives and their impact on healthcare and engineering."
     items={[
       {
-        title: 'Interdisciplinary Collaboration',
-        description:
-          'Working across traditional boundaries to combine expertise from various fields for breakthrough innovations.',
+        title: 'LVAD Research',
+        description: 'Optimizing Left Ventricular Assist Device design to minimize blood damage and improve patient outcomes.',
+        image: '/images/projects/1.png',
+        callToAction: {
+          text: 'Learn More',
+          href: '/research/projects/lvad-research',
+        },
       },
       {
-        title: 'State-of-the-Art Facilities',
-        description:
-          'Utilizing cutting-edge equipment and computational resources to conduct groundbreaking research.',
+        title: 'Fluid Measurement',
+        description: 'Studying flow patterns past transcatheter aortic valves using time-resolved 3D particle tracking.',
+        image: '/images/projects/4.png',
+        callToAction: {
+          text: 'Learn More',
+          href: '/research/projects/fluid-measurement',
+        },
       },
       {
-        title: 'Industry Partnerships',
-        description:
-          'Collaborating with industry leaders to translate research findings into practical applications.',
+        title: 'Turbomachinery',
+        description: 'Understanding extreme events in turbomachines through advanced imaging and flow control techniques.',
+        image: '/images/projects/7.png',
+        callToAction: {
+          text: 'Learn More',
+          href: '/research/projects/turbomachinery-research',
+        },
       },
     ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1581093458791-9f3c3250a8b7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      alt: 'Research Laboratory',
-    }}
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Pushing the Boundaries of Science</h3>
-      Our research drives innovation in fluid dynamics and engineering
-    </Fragment>
-  </Content>
+  />
 
-  <!-- Stats Widget ***************** -->
-  <Stats
-    items={[
-      {
-        title: 'Research Projects',
-        value: '15+',
-        icon: 'tabler:chart-bar',
-      },
-      {
-        title: 'Publications',
-        value: '50+',
-        icon: 'tabler:book',
-      },
-      {
-        title: 'Team Members',
-        value: '25+',
-        icon: 'tabler:users',
-      },
-      {
-        title: 'Industry Partners',
-        value: '10+',
-        icon: 'tabler:building',
-      },
-    ]}
+  <!-- News Ticker Widget *************** -->
+  <NewsTicker
+    id="news-ticker"
+    tagline="Latest Updates"
+    title="Lab News Feed"
+    subtitle="Stay informed about our latest research, publications, and achievements"
   />
 
   <!-- Call to Action Widget ******** -->
   <CallToAction
     title="Join Our Research Team"
     subtitle="We're always looking for talented researchers, students, and collaborators to join our lab."
+    image="/images/team/group-photo.jpg"
+    imageAlt="Fluid Innovation Lab Research Team"
     actions={[
       {
         text: 'Apply Now',
-        href: '/join',
+        href: '/contact',
         variant: 'primary',
         icon: 'tabler:user-plus',
       },
       {
         text: 'Learn More',
-        href: '/research',
+        href: '/team/current',
         icon: 'tabler:arrow-right',
       },
     ]}

@@ -1,0 +1,384 @@
+---
+import Layout from '../../layouts/PageLayout.astro';
+import { headerData } from '../../navigation';
+import Publications from '../../components/widgets/Publications.astro';
+
+const { title, description } = headerData.links[0].links[1];
+
+// Your publications organized by category
+const journalPublications = [
+  {
+    title: "Effects of Implantation Height on the Performance of a Redo Transcatheter Aortic Valve Replacement Using a Balloon-Expandable Valve",
+    authors: "Chen, H., Samaee, M., Yadav, P., Thourani, V., & Dasi, L. P.",
+    year: 2024,
+    journal: "JTCVS Open",
+    doi: "",
+    url: "https://www.sciencedirect.com/science/article/pii/S2666273624000561"
+  },
+  {
+    title: "A novel computational method to predict hypoattenuated leaflet thickening post-transcatheter aortic valve replacement using preprocedural computed tomography scans",
+    authors: "Venkatesh, A., Esmailie, F., Tregobov, N., Hatoum, H., Yeats, B., Chen, H., Lee, B. J., Ruile, P., Neumann, F.-J., Blanke, P., Leipsic, J., Gulsin, G., Thourani, V., Meier, D., Dasi, L. P., & Sellers, S. L.",
+    year: 2025,
+    journal: "JTCVS Structural and Endovascular",
+    volume: "5",
+    pages: "100041",
+    doi: "10.1016/j.xjse.2024.100041",
+    url: "https://www.sciencedirect.com/science/article/pii/S295060502400041X"
+  },
+  {
+    title: "Sensitivity of Post-TAVR Hemodynamics to the Distal Aortic Arch Anatomy: A High-Fidelity CFD Study",
+    authors: "Natarajan, T., Singh-Gryzbon, S., Chen, H., Sadri, V., Ruile, P., Neumann, F.-J., Yoganathan, A. P., & Dasi, L. P.",
+    year: 2024,
+    journal: "Cardiovascular Engineering and Technology",
+    volume: "15",
+    issue: "4",
+    pages: "463-480",
+    doi: "10.1007/s13239-024-00728-z",
+    url: "https://link.springer.com/article/10.1007/s13239-024-00728-z"
+  },
+  {
+    title: "Patient-specific 3D in vitro modeling and fluid dynamic analysis of primary pulmonary vein stenosis",
+    authors: "Devlin, C., Tomov, M. L., Chen, H., Nama, S., Ali, S., Neelakantan, S., Avazmohammadi, R., Dasi, L. P., Bauser-Heaton, H. D., & Serpooshan, V.",
+    year: 2024,
+    journal: "Frontiers in Cardiovascular Medicine",
+    volume: "11",
+    pages: "1432784",
+    doi: "10.3389/fcvm.2024.1432784",
+    url: "https://www.frontiersin.org/journals/cardiovascular-medicine/articles/10.3389/fcvm.2024.1432784/full"
+  },
+  {
+    title: "Targeted rapamycin delivery via magnetic nanoparticles to address stenosis in a 3D bioprinted in vitro model of pulmonary veins",
+    authors: "Ning, L., Zanella, S., Tomov, M. L., Amoli, M. S., Jin, L., Hwang, B., Saadeh, M., Chen, H., Neelakantan, S., Dasi, L. P., Avazmohammadi, R., Mahmoudi, M., Bauser‐Heaton, H. D., & Serpooshan, V.",
+    year: 2024,
+    journal: "Advanced Science",
+    volume: "11",
+    issue: "26",
+    pages: "2400476",
+    doi: "10.1002/advs.202400476",
+    url: "https://advanced.onlinelibrary.wiley.com/doi/full/10.1002/advs.202400476"
+  },
+  {
+    title: "Effect of Ascending Aortic Curvature on Flow in the Sinus and Neo-sinus Following TAVR: A Patient-Specific Study",
+    authors: "Kim, J. H., Sadri, V., Chen, H., Bhat, S., Kohli, K., Makkar, R., Babaliaros, V. C., Sharma, R. P., & Yoganathan, A. P.",
+    year: 2024,
+    journal: "Annals of Biomedical Engineering",
+    volume: "52",
+    issue: "2",
+    pages: "425-439",
+    doi: "10.1007/s10439-023-03392-x",
+    url: "https://link.springer.com/article/10.1007/s10439-023-03392-x"
+  },
+  {
+    title: "An In-Vitro Study of the Flow Past a Transcatheter Aortic Valve Using Time-Resolved 3D Particle Tracking",
+    authors: "Chen, H., & Dasi, L. P.",
+    year: 2023,
+    journal: "Annals of Biomedical Engineering",
+    volume: "51",
+    pages: "1449-1460",
+    doi: "10.1007/s10439-023-03147-8",
+    url: "https://link.springer.com/article/10.1007/s10439-023-03147-8"
+  },
+  {
+    title: "Effect of the Axial Casing Groove Geometry on the Production and Distribution of Reynolds Stresses in the Tip Region of an Axial Compressor Rotor",
+    authors: "Koley, S. S., Saraswat, A., Chen, H., & Katz, J.",
+    year: 2022,
+    journal: "Journal of Turbomachinery",
+    volume: "144",
+    issue: "9",
+    pages: "091007",
+    doi: "",
+    url: "https://asmedigitalcollection.asme.org/turbomachinery/article/144/9/091007/1131420/Effect-of-the-Axial-Casing-Groove-Geometry-on-the"
+  },
+  {
+    title: "Image Registration-Based Method for Reconstructing Transcatheter Heart Valve Geometry from Patient-Specific CT Scans",
+    authors: "Chen, H., Yeats, B., Swamy, K., Samaee, M., Sivakumar, S. K., Esmailie, F., Razavi, A., Yadav, P., Thourani, V. H., Polsani, V., & Dasi, L. P.",
+    year: 2022,
+    journal: "Annals of Biomedical Engineering",
+    volume: "50",
+    pages: "805-815",
+    doi: "10.1007/s10439-022-02962-9",
+    url: "https://link.springer.com/article/10.1007/s10439-022-02962-9"
+  },
+  {
+    title: "Biomechanics of Transcatheter Aortic Valve Replacement Complications and Computational Predictive Modeling",
+    authors: "Esmailie, F., Razavi, A., Yeats, B., Sivakumar, S. K., Chen, H., Samaee, M., Shah, I. A., Veneziani, A., Yadav, P., Thourani, V. H., & Dasi, L. P.",
+    year: 2022,
+    journal: "Structural Heart",
+    volume: "6",
+    issue: "2",
+    pages: "100032",
+    doi: "10.1016/j.struc.2022.100032",
+    url: "https://www.sciencedirect.com/science/article/pii/S2474870622017821"
+  },
+  {
+    title: "Effects of Axial Casing Grooves on the Structure of Turbulence in the Tip Region of an Axial Turbomachine Rotor",
+    authors: "Chen, H., Li, Y., Koley, S. S., & Katz, J.",
+    year: 2021,
+    journal: "Journal of Turbomachinery",
+    volume: "143",
+    pages: "091009",
+    doi: "",
+    url: "https://asmedigitalcollection.asme.org/turbomachinery/article-abstract/143/9/091009/1105097"
+  },
+  {
+    title: "On the effects of tip clearance and operating condition on the flow structures within an axial turbomachine rotor passage",
+    authors: "Li, Y., Chen, H., Tan, D., & Katz, J.",
+    year: 2019,
+    journal: "Journal of Turbomachinery",
+    volume: "141",
+    pages: "111002",
+    doi: "",
+    url: "https://asmedigitalcollection.asme.org/turbomachinery/article/141/11/111002/975252/On-the-Effects-of-Tip-Clearance-and-Operating"
+  },
+  {
+    title: "Challenges in Modeling of Turbulence in the Tip Region of Axial Turbomachines",
+    authors: "Li, Y., Chen, H., & Katz, J.",
+    year: 2019,
+    journal: "Journal of Ship Research",
+    volume: "63",
+    pages: "56-68",
+    doi: "",
+    url: "https://onepetro.org/JSR/article-abstract/63/01/56/175263/Challenges-in-Modeling-of-Turbulence-in-the-Tip"
+  },
+  {
+    title: "On the Interactions of a Rotor Blade Tip Flow With Axial Casing Grooves in an Axial Compressor Near the Best Efficiency Point",
+    authors: "Chen, H., Li, Y., & Katz, J.",
+    year: 2019,
+    journal: "Journal of Turbomachinery",
+    volume: "141",
+    pages: "011008",
+    doi: "",
+    url: "https://asmedigitalcollection.asme.org/turbomachinery/article-abstract/141/1/011008/368630/On-the-Interactions-of-a-Rotor-Blade-Tip-Flow-With"
+  },
+  {
+    title: "Measurements and characterization of turbulence in the tip region of an axial compressor rotor",
+    authors: "Li, Y., Chen, H., & Katz, J.",
+    year: 2017,
+    journal: "Journal of Turbomachinery",
+    volume: "139",
+    pages: "121003",
+    doi: "",
+    url: "https://asmedigitalcollection.asme.org/turbomachinery/article/139/12/121003/378788/Measurements-and-Characterization-of-Turbulence-in"
+  },
+  {
+    title: "An experimental study of stall suppression and associated changes to the flow structures in the tip region of an axial low speed fan rotor by axial casing grooves",
+    authors: "Chen, H., Li, Y., Koley, S. S., Doeller, N., & Katz, J.",
+    year: 2017,
+    journal: "Journal of Turbomachinery",
+    volume: "139",
+    pages: "121010",
+    doi: "",
+    url: "https://asmedigitalcollection.asme.org/turbomachinery/article/139/12/121010/378806/An-Experimental-Study-of-Stall-Suppression-and"
+  },
+  {
+    title: "Visualizations of flow structures in the rotor passage of an axial compressor at the onset of stall",
+    authors: "Chen, H., Li, Y., Tan, D., & Katz, J.",
+    year: 2017,
+    journal: "Journal of Turbomachinery",
+    volume: "139",
+    pages: "041008",
+    doi: "",
+    url: "https://asmedigitalcollection.asme.org/turbomachinery/article-abstract/139/4/041008/473252/Visualizations-of-Flow-Structures-in-the-Rotor"
+  },
+  {
+    title: "Vortex structures for flow over a delta wing with sinusoidal leading edge",
+    authors: "Chen, H., Wang, JJ.",
+    year: 2014,
+    journal: "Experiments in Fluids",
+    volume: "55",
+    pages: "1761",
+    doi: "10.1007/s00348-014-1761-1",
+    url: "https://doi.org/10.1007/s00348-014-1761-1"
+  },
+  {
+    title: "Effects of sinusoidal leading edge on delta wing performance and mechanism",
+    authors: "Chen, H., Pan, C. & Wang, J.",
+    year: 2013,
+    journal: "Science China Technological Sciences",
+    volume: "56",
+    pages: "772-779",
+    doi: "10.1007/s11431-013-5143-3",
+    url: "https://doi.org/10.1007/s11431-013-5143-3"
+  }
+];
+
+const conferenceProceedings = [
+  {
+    title: "Systematic Experimental Evaluations Aimed at Optimizing the Geometry of Axial Casing Groove in a Compressor",
+    authors: "Chen, H., Koley, S. S., Li, Y., & Katz, J.",
+    year: 2019,
+    journal: "Turbo Expo: Power for Land, Sea, and Air",
+    volume: "58554",
+    pages: "V02AT39A021",
+    publisher: "American Society of Mechanical Engineers",
+    doi: "",
+    url: "https://asmedigitalcollection.asme.org/GT/proceedings-abstract/GT2019/V02AT39A021/1066433"
+  },
+  {
+    title: "On the interactions of a rotor blade tip flow with axial casing grooves in an axial compressor near the best efficiency point",
+    authors: "Chen, H., Li, Y., & Katz, J.",
+    year: 2018,
+    journal: "Turbo Expo: Power for Land, Sea, and Air",
+    volume: "50992",
+    pages: "V02AT39A043",
+    publisher: "American Society of Mechanical Engineers",
+    doi: "",
+    url: "https://asmedigitalcollection.asme.org/GT/proceedings-abstract/GT2018/V02AT39A043/289767"
+  },
+  {
+    title: "Effects of tip clearance and operating conditions on the flow structure and turbulence within an axial compressor rotor passage",
+    authors: "Li, Y., Chen, H., Tan, D., & Katz, J.",
+    year: 2016,
+    journal: "Turbo Expo: Power for Land, Sea, and Air",
+    volume: "49699",
+    pages: "V02AT37A030",
+    publisher: "American Society of Mechanical Engineers",
+    doi: "",
+    url: "https://asmedigitalcollection.asme.org/GT/proceedings-abstract/GT2016/V02AT37A030/238881"
+  },
+  {
+    title: "Stereoscopic PIV measurement of the flow in the tip region of an axial waterjet pump",
+    authors: "Li, Y., Tan, D., Chen, H., & Katz, J.",
+    year: 2016,
+    journal: "16th International Symposium on Transport Phenomena and Dynamics of Rotating Machinery",
+    volume: "",
+    pages: "",
+    publisher: "",
+    doi: "",
+    url: "https://hal.science/hal-01890072/"
+  },
+  {
+    title: "Effects of tip gap size on the flow structure in the tip region of an axial turbomachine",
+    authors: "Li, Y., Tan, D., Chen, H., & Katz, J.",
+    year: 2015,
+    journal: "Fluids Engineering Division Summer Meeting",
+    volume: "57212",
+    pages: "V001T33A023",
+    publisher: "American Society of Mechanical Engineers",
+    doi: "",
+    url: "https://asmedigitalcollection.asme.org/FEDSM/proceedings-abstract/AJKFluids2015/57212/228023"
+  },
+  {
+    title: "The three dimensional flow structure and turbulence in the tip region of an axial flow compressor",
+    authors: "Tan, David, Yuanchao Li, Huang Chen, Ian Wilkes, and Joseph Katz",
+    year: 2015,
+    journal: "Turbo Expo: Power for Land, Sea, and Air",
+    volume: "56635",
+    pages: "V02AT37A036",
+    publisher: "American Society of Mechanical Engineers",
+    doi: "",
+    url: "https://asmedigitalcollection.asme.org/GT/proceedings-abstract/GT2015/56635/V02AT37A036/236879"
+  }
+];
+
+const patents = [
+  {
+    title: "Systems and methods for modeling risk of transcatheter valve deployment",
+    inventors: "Dasi, L. P., Yeats, B. A. B., Chen, H., Esmailie, F., Razavi, A., Shah, I., Sivakumar, S. K., Veneziani, A.",
+    year: 2024,
+    patentOffice: "US",
+    applicationNumber: "18560210",
+    publicationNumber: "US20240242847A1",
+    url: "https://patents.google.com/patent/US20240242847A1/en"
+  },
+  {
+    title: "Systems and methods for reconstructing an anatomical structure model",
+    inventors: "Dasi, L. P., Chen, H., Lee, B. J., Sivakumar, S. K., Yeats, B. A. B.",
+    year: 2024,
+    patentOffice: "US",
+    applicationNumber: "18560134",
+    publicationNumber: "US20240225739A1",
+    url: "https://patents.google.com/patent/US20240225739A1/en"
+  },
+  {
+    title: "Systems and methods for reconstructing implantable device geometry from patient-specific imaging scans",
+    inventors: "Dasi, L. P., Chen, H., Esmailie, F., Samaee, M., Sivakumar, S. K., Yeats, B. A. B.",
+    year: 2024,
+    patentOffice: "US",
+    applicationNumber: "18560144",
+    publicationNumber: "US20240225740A1",
+    url: "https://patents.google.com/patent/US20240225740A1/en"
+  }
+];
+---
+
+<Layout title={title} description={description}>
+  <section class="px-4 py-4 sm:px-6 mx-auto lg:px-8 lg:py-6 max-w-7xl">
+    <div class="max-w-3xl mx-auto text-center mb-6">
+      <h1 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl mb-3">
+        Publications
+      </h1>
+      <p class="text-base text-slate-600 dark:text-slate-400">
+        Our research contributions to the scientific community
+      </p>
+    </div>
+
+    <div class="max-w-6xl mx-auto">
+      <div class="publications-section">
+        <h2 class="section-title text-xl font-bold text-slate-900 dark:text-white">Journal Publications</h2>
+        {journalPublications.length > 0 ? (
+          <Publications publications={journalPublications} />
+        ) : (
+          <p class="text-slate-600 dark:text-slate-400 text-center py-3">No journal publications yet.</p>
+        )}
+      </div>
+
+      <div class="publications-section">
+        <h2 class="section-title text-xl font-bold text-slate-900 dark:text-white">Conference Proceedings</h2>
+        {conferenceProceedings.length > 0 ? (
+          <Publications publications={conferenceProceedings} />
+        ) : (
+          <p class="text-slate-600 dark:text-slate-400 text-center py-3">No conference proceedings yet.</p>
+        )}
+      </div>
+
+      <div class="publications-section">
+        <h2 class="section-title text-xl font-bold text-slate-900 dark:text-white">Patents</h2>
+        {patents.length > 0 ? (
+          <Publications publications={patents} />
+        ) : (
+          <p class="text-slate-600 dark:text-slate-400 text-center py-3">No patents yet.</p>
+        )}
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .publications-section {
+    background: linear-gradient(to bottom, rgba(var(--primary-50), 0.05), transparent);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  }
+  .section-title {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 1rem;
+    padding-bottom: 0.25rem;
+  }
+  .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 2.5rem;
+    height: 0.2rem;
+    background: rgb(var(--primary-500));
+    border-radius: 0.5rem;
+  }
+</style>
+
+<script>
+  // Note: Google Scholar doesn't provide a public API
+  // For a more automated solution, you would need to:
+  // 1. Create a backend service that scrapes Google Scholar (with permission)
+  // 2. Use a third-party service that provides Google Scholar data
+  // 3. Maintain your own database of publications and sync periodically
+  
+  document.addEventListener('DOMContentLoaded', () => {
+    // This is where you would implement any client-side functionality
+    // for the publications page
+  });
+</script> 

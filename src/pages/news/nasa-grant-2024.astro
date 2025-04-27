@@ -1,0 +1,113 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import { Icon } from 'astro-icon/components';
+
+const metadata = {
+  title: 'NASA Grant Award 2024 - Fluid Innovation Lab',
+  description: 'Details about our NASA-funded research project on Centrifugal Nuclear Thermal Propulsion (CNTP) optimization study examining reactor physics and thermal-fluid dynamics.',
+  ignoreTitleTemplate: true,
+};
+
+// Grant details
+const grantDetails = {
+  title: 'Nexus of Neutronics-Thermal Fluid Analysis for Optimizing Centrifugal Nuclear Thermal Propulsion',
+  date: 'July 28, 2024',
+  funding: 'NASA Research Grant',
+  duration: '1 year',
+  category: 'Grant',
+  categoryColor: 'bg-cyan-100 text-cyan-800 dark:bg-cyan-900 dark:text-cyan-200',
+};
+---
+
+<Layout metadata={metadata}>
+  <section class="px-4 py-16 sm:px-6 mx-auto lg:px-8 lg:py-20 max-w-7xl">
+    <div class="max-w-3xl mx-auto">
+      <!-- Back to News Link -->
+      <a href="/news" class="inline-flex items-center text-primary-600 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-300 mb-8">
+        <Icon name="tabler:arrow-left" class="w-4 h-4 mr-1" />
+        Back to News
+      </a>
+
+      <!-- Article Header -->
+      <header class="mb-12">
+        <div class="flex items-center gap-4 mb-4">
+          <span class={`inline-block px-3 py-1 rounded-full text-sm font-semibold ${grantDetails.categoryColor}`}>
+            {grantDetails.category}
+          </span>
+          <span class="text-sm text-muted dark:text-slate-400 flex items-center">
+            <Icon name="tabler:calendar" class="w-4 h-4 mr-1" />
+            {grantDetails.date}
+          </span>
+        </div>
+        <div class="flex items-center justify-between mb-4">
+          <h1 class="text-4xl md:text-5xl font-bold leading-tighter tracking-tighter font-heading bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400">
+            {grantDetails.title}
+          </h1>
+          <div class="w-24 h-24 flex-shrink-0">
+            <img 
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/NASA_logo.svg/1200px-NASA_logo.svg.png" 
+              alt="NASA Logo" 
+              class="w-full h-full object-contain"
+            />
+          </div>
+        </div>
+        <div class="flex flex-wrap gap-4 text-muted dark:text-slate-400">
+          <span class="flex items-center">
+            <Icon name="tabler:award" class="w-4 h-4 mr-1" />
+            {grantDetails.funding}
+          </span>
+          <span class="flex items-center">
+            <Icon name="tabler:clock" class="w-4 h-4 mr-1" />
+            Duration: {grantDetails.duration}
+          </span>
+        </div>
+      </header>
+
+      <!-- Featured Image -->
+      <div class="mb-12 rounded-lg overflow-hidden shadow-lg">
+        <img 
+          src="/images/news/nasagrant.png" 
+          alt="Centrifugal Nuclear Thermal Propulsion Concept" 
+          class="w-full h-auto"
+        />
+        <div class="p-4 bg-slate-100 dark:bg-slate-800 text-sm text-muted dark:text-slate-400">
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <article class="prose prose-lg dark:prose-invert max-w-none">
+        <p>
+          We are excited to announce our proposal, "Nexus of Neutronics-Thermal Fluid Analysis for Optimizing Centrifugal Nuclear Thermal Propulsion," has been selected for funding! As the Principal Investigator, Dr. Huang Chen will work with Dr. Yi-Tung Chen to conduct a preliminary optimization study of Centrifugal Nuclear Thermal Propulsion (CNTP) engines, examining both reactor physics and thermal-fluid dynamics. This one-year seed funding from NASA will help us understand how to maximize the performance of this promising propulsion system, which has the potential to bring humans to the solar system and beyond.
+        </p>
+
+        <p>
+          This project is focused on conducting a preliminary optimization study of Centrifugal Nuclear Thermal Propulsion (CNTP) engines, examining both reactor physics and thermal-fluid dynamics. The next chapter of human space exploration to our solar system and beyond requires highly efficient propulsion systems. Among various designs, fission nuclear thermal propulsion (NTP) stands out for its high thrust and high specific impulse (Isp).
+        </p>
+
+        <p>
+          Recently, the global consent to nuclear non-proliferation and the Comprehensive Nuclear-Test-Ban Treaty (CTBT) pivoted away from using high-enrichment uranium (HEU) in nuclear reactor cores. This shift promotes the adoption of High Assay Low Enriched Uranium (HALEU) fuel across nuclear reactor designs. With HEU no longer a viable option, increasing the temperature gradient is the key to improve Isp. As such, CNTP with a liquid core design has gained significant attention from NASA.
+        </p>
+
+        <p>
+          CNTP uses an array of fast-spinning cylinders that confine high-temperature molten uranium. When propellant is injected into the molten fuel as bubbles, a temperature of over 5,000K can be achieved. The extremely hot propellant helps the engine to reach an impressive Isp of 1,800s, tripling that of the most efficient chemical propulsion system.
+        </p>
+      </article>
+
+      <!-- Social Sharing -->
+      <div class="border-t border-slate-200 dark:border-slate-700 mt-12 pt-8">
+        <h3 class="text-lg font-bold mb-4">Share this article</h3>
+        <div class="flex gap-4">
+          <a href="#" class="text-muted hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+            <Icon name="tabler:brand-twitter" class="w-6 h-6" />
+          </a>
+          <a href="#" class="text-muted hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+            <Icon name="tabler:brand-linkedin" class="w-6 h-6" />
+          </a>
+          <a href="#" class="text-muted hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+            <Icon name="tabler:mail" class="w-6 h-6" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout> 

@@ -11,15 +11,21 @@ const {
   items = [],
   columns = 3,
   defaultIcon,
+  compact = false,
 
   id,
   isDark = false,
   classes = {},
   bg = await Astro.slots.render('bg'),
 } = Astro.props;
+
+// Custom container class for compact mode
+const containerClass = compact 
+  ? `max-w-7xl mx-auto py-6 md:py-8 lg:py-10 ${classes?.container ?? ''}` 
+  : `max-w-7xl mx-auto ${classes?.container ?? ''}`;
 ---
 
-<WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-7xl mx-auto ${classes?.container ?? ''}`} bg={bg}>
+<WidgetWrapper id={id} isDark={isDark} containerClass={containerClass} bg={bg}>
   <Headline title={title} subtitle={subtitle} tagline={tagline} classes={classes?.headline as Record<string, string>} />
   <ItemGrid2
     items={items}

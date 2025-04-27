@@ -14,22 +14,23 @@ export const GET = async () => {
 
   const posts = await fetchPosts();
 
-  const rss = await getRssString({
-    title: `${SITE.name}’s Blog`,
-    description: METADATA?.description || '',
+  // Create RSS feed with XSL stylesheet reference
+  const rssWithStyle = `<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="/rss.xsl" type="text/xsl"?>
+${await getRssString({
+    title: 'Fluid Innovation Lab News',
+    description: 'Latest updates from the Fluid Innovation Lab - Research breakthroughs, publications, and announcements in fluid dynamics and engineering.',
     site: import.meta.env.SITE,
-
     items: posts.map((post) => ({
       link: getPermalink(post.permalink, 'post'),
       title: post.title,
       description: post.excerpt,
       pubDate: post.publishDate,
     })),
-
     trailingSlash: SITE.trailingSlash,
-  });
+  })}`;
 
-  return new Response(rss, {
+  return new Response(rssWithStyle, {
     headers: {
       'Content-Type': 'application/xml',
     },

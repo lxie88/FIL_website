@@ -1,0 +1,230 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  title?: string;
+  subtitle?: string;
+  tagline?: string;
+}
+
+const { title = 'Fluid Innovation Lab', subtitle = 'Advancing the Frontiers of Fluid Dynamics Research', tagline = 'Welcome' } = Astro.props;
+
+const slides = [
+  {
+    image: '/images/particles.gif',
+    alt: 'Particle Tracking Visualization',
+    title: '3D Particle Tracking',
+    description: 'Advanced visualization of particle trajectories in complex flows using our innovative tracking algorithms.'
+  },
+  {
+    image: '/images/cavitation.gif',
+    alt: 'Cavitation Phenomenon',
+    title: 'Cavitation Studies',
+    description: 'Real-time visualization of cavitation phenomena in high-speed flows, critical for understanding material damage and performance.'
+  },
+  {
+    image: '/images/results.gif',
+    alt: 'Research Results',
+    title: 'Flow Analysis Results',
+    description: 'Comprehensive analysis of flow patterns and structures in various engineering applications.'
+  }
+];
+---
+
+<section class="relative h-screen w-full overflow-hidden">
+  <div class="slideshow-container" id="fullscreen-slideshow">
+    {slides.map((slide, index) => (
+      <div class="slide fade" data-index={index}>
+        <img
+          src={slide.image}
+          alt={slide.alt}
+          class="w-full h-full object-cover"
+          onerror="this.style.display='none'"
+        />
+        <div class="absolute inset-0 bg-gradient-to-b from-black/20 to-black/40 flex flex-col justify-center items-center text-center p-8">
+          <div class="max-w-4xl">
+            <p class="text-2xl md:text-3xl font-bold tracking-wide text-white uppercase mb-6">
+              {tagline}
+            </p>
+            <h1 class="text-5xl md:text-7xl font-bold text-white mb-8">
+              {title}
+            </h1>
+            <p class="text-2xl md:text-3xl text-white/95 mb-12">
+              {subtitle}
+            </p>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+  
+  <button class="slideshow-nav prev" aria-label="Previous slide">
+    <Icon name="tabler:chevron-left" class="w-8 h-8" />
+  </button>
+  <button class="slideshow-nav next" aria-label="Next slide">
+    <Icon name="tabler:chevron-right" class="w-8 h-8" />
+  </button>
+  
+  <div class="slideshow-dots">
+    {slides.map((_, index) => (
+      <button class="dot" data-index={index} aria-label={`Go to slide ${index + 1}`}></button>
+    ))}
+  </div>
+</section>
+
+<style>
+  .slideshow-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  
+  .slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .slide.active {
+    opacity: 1;
+  }
+  
+  .slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .slideshow-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s;
+  }
+  
+  .slideshow-nav:hover {
+    background: rgba(0, 0, 0, 0.8);
+    transform: translateY(-50%) scale(1.1);
+  }
+  
+  .slideshow-nav.prev {
+    left: 20px;
+  }
+  
+  .slideshow-nav.next {
+    right: 20px;
+  }
+  
+  .slideshow-dots {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+    z-index: 10;
+  }
+  
+  .dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  
+  .dot:hover {
+    background: rgba(255, 255, 255, 0.8);
+  }
+  
+  .dot.active {
+    background: white;
+    transform: scale(1.2);
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const slideshow = document.getElementById('fullscreen-slideshow');
+    if (!slideshow) return;
+    
+    const slides = slideshow.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.dot');
+    const prevBtn = document.querySelector('.slideshow-nav.prev');
+    const nextBtn = document.querySelector('.slideshow-nav.next');
+    
+    let currentSlide = 0;
+    const slideCount = slides.length;
+    
+    // Initialize the slideshow
+    function initSlideshow() {
+      if (slideCount === 0) return;
+      
+      // Show the first slide
+      slides[0].classList.add('active');
+      dots[0].classList.add('active');
+      
+      // Set up event listeners
+      if (prevBtn) prevBtn.addEventListener('click', showPrevSlide);
+      if (nextBtn) nextBtn.addEventListener('click', showNextSlide);
+      
+      // Set up dot navigation
+      dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => goToSlide(index));
+      });
+      
+      // Auto-advance slides
+      setInterval(showNextSlide, 6000);
+    }
+    
+    // Show a specific slide
+    function goToSlide(index) {
+      // Hide current slide
+      slides[currentSlide].classList.remove('active');
+      dots[currentSlide].classList.remove('active');
+      
+      // Update current slide index
+      currentSlide = index;
+      
+      // Show new slide
+      slides[currentSlide].classList.add('active');
+      dots[currentSlide].classList.add('active');
+    }
+    
+    // Show the next slide
+    function showNextSlide() {
+      const nextIndex = (currentSlide + 1) % slideCount;
+      goToSlide(nextIndex);
+    }
+    
+    // Show the previous slide
+    function showPrevSlide() {
+      const prevIndex = (currentSlide - 1 + slideCount) % slideCount;
+      goToSlide(prevIndex);
+    }
+    
+    // Initialize the slideshow
+    initSlideshow();
+  });
+</script> 

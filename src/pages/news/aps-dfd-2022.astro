@@ -1,0 +1,127 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import { Icon } from 'astro-icon/components';
+
+const metadata = {
+  title: 'APS DFD Conference Presentation - Fluid Innovation Lab',
+  description: 'Presentation at the 75th Annual Meeting of the APS Division of Fluid Dynamics in Indianapolis, Indiana',
+  ignoreTitleTemplate: true,
+};
+
+const presentation = {
+  title: 'Quantifying Particle Residence Time and Blood Damage Using 3D Time-Resolved Particle Tracking',
+  date: 'November 20, 2022',
+  event: '75th Annual Meeting of the APS Division of Fluid Dynamics',
+  eventUrl: 'https://www.apsdfd2022.org/',
+  location: 'Indianapolis, Indiana',
+  category: 'Conference',
+  categoryColor: 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200',
+  abstract: 'Quantifying particle residence time and blood damage is essential in developing prosthetic heart valves and other blood-contacting medical devices. Given the high cost of the in vitro blood loop experiments, past studies have mainly relied on computational fluid dynamics (CFD) with hemolysis models for such tasks. However, CFD simulation is challenging to perform when resolving the complex fluid-structure-interaction problem is required. In this study, a method to quantify blood damage experimentally using 3D time-resolved particle tracking is developed, and the results are compared with CFD simulations. Experiments are performed in a fully refractive index-matched setup, and particle tracks are obtained using the shake-the-box algorithm. Direct quantifications of the particle residence time and blood damage only become possible after reconnecting the broken tracks with an extension algorithm that extrapolates the particle path forward and backward in time. The blood damage of an individual particle is calculated by a numerical hemolysis model based on the shear stress and exposure time. Preliminary results show that 3D particle tracking can be a very useful and accurate tool to quantify blood damage, especially when CFD simulation is difficult to perform.',
+  content: 'I am excited to present our work at the 75th APS DFD annual meeting in Indianapolis! We have demonstrated how to quantify particle residence time and blood damage in an intracranial aneurysm using 3D time-resolved particle tracking. We have also looked at the effects of inflow pulsatility on the blood residence time in the aneurysm. This work can help evaluate the efficacy of the treatment for brain aneurysms using flow diversion stents. It opens the possibility to directly quantify blood damage in other medical devices using 3D flow measurement techniques.',
+  image: '/images/news/conference1.jpg',
+  imageAlt: 'APS DFD Conference Presentation',
+};
+---
+
+<Layout metadata={metadata}>
+  <section class="px-4 py-16 sm:px-6 mx-auto lg:px-8 lg:py-20 max-w-7xl">
+    <div class="max-w-4xl mx-auto">
+      <a
+        href="/news"
+        class="inline-flex items-center text-primary-600 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-300 font-medium mb-8"
+      >
+        <Icon name="tabler:arrow-left" class="w-4 h-4 mr-1" />
+        Back to News
+      </a>
+
+      <article class="bg-white dark:bg-slate-800 rounded-xl shadow-lg p-8">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+          <span class={`inline-block px-3 py-1 rounded-full text-sm font-semibold ${presentation.categoryColor}`}>
+            {presentation.category}
+          </span>
+          <span class="text-sm text-muted dark:text-slate-400 flex items-center mt-2 md:mt-0">
+            <Icon name="tabler:calendar" class="w-4 h-4 mr-1" />
+            {presentation.date}
+          </span>
+        </div>
+
+        <h1 class="text-3xl md:text-4xl font-bold mb-4 text-gray-800 dark:text-white">
+          {presentation.title}
+        </h1>
+
+        <div class="flex items-center mb-6 text-muted dark:text-slate-400">
+          <Icon name="tabler:map-pin" class="w-4 h-4 mr-1" />
+          <a href={presentation.eventUrl} target="_blank" rel="noopener noreferrer" class="hover:text-primary-600 dark:hover:text-primary-400">
+            {presentation.event}
+          </a>
+          <span class="mx-2">•</span>
+          <span>{presentation.location}</span>
+        </div>
+
+        {presentation.image && (
+          <div class="mb-8">
+            <img
+              src={presentation.image}
+              alt={presentation.imageAlt}
+              class="w-full h-auto rounded-lg shadow-md"
+              onerror="this.style.display='none'"
+            />
+          </div>
+        )}
+
+        <div class="prose prose-lg max-w-none dark:prose-invert">
+          <p class="lead">{presentation.content}</p>
+
+          <h2 class="text-2xl font-bold mt-8 mb-4">Abstract</h2>
+          <p>{presentation.abstract}</p>
+
+          <h2 class="text-2xl font-bold mt-8 mb-4">Research Impact</h2>
+          <p>
+            This research represents a significant advancement in the field of medical device development, particularly for cardiovascular applications. By providing an experimental method to quantify blood damage, we're addressing a critical challenge in the development of prosthetic heart valves and other blood-contacting medical devices.
+          </p>
+          <p>
+            The ability to directly measure particle residence time and blood damage in complex geometries, such as intracranial aneurysms, opens new possibilities for evaluating treatment efficacy. This work has particular relevance for assessing the performance of flow diversion stents in treating brain aneurysms, where understanding blood flow patterns is crucial for predicting treatment outcomes.
+          </p>
+          <p>
+            Our approach offers several advantages over traditional computational methods:
+          </p>
+          <ul>
+            <li>Direct experimental quantification of blood damage</li>
+            <li>Ability to study complex fluid-structure interactions</li>
+            <li>Validation of computational models</li>
+            <li>Potential for real-time assessment of device performance</li>
+          </ul>
+
+          <h2 class="text-2xl font-bold mt-8 mb-4">Share This Presentation</h2>
+          <div class="flex space-x-4">
+            <a
+              href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(presentation.title)}&url=${encodeURIComponent(`https://fluidinnovationlab.com${Astro.url.pathname}`)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-primary-600 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-300"
+              aria-label="Share on Twitter"
+            >
+              <Icon name="tabler:brand-twitter" class="w-6 h-6" />
+            </a>
+            <a
+              href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(`https://fluidinnovationlab.com${Astro.url.pathname}`)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-primary-600 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-300"
+              aria-label="Share on LinkedIn"
+            >
+              <Icon name="tabler:brand-linkedin" class="w-6 h-6" />
+            </a>
+            <a
+              href={`mailto:?subject=${encodeURIComponent(presentation.title)}&body=${encodeURIComponent(`Check out this presentation: https://fluidinnovationlab.com${Astro.url.pathname}`)}`}
+              class="text-primary-600 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-300"
+              aria-label="Share via Email"
+            >
+              <Icon name="tabler:mail" class="w-6 h-6" />
+            </a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+</Layout> 

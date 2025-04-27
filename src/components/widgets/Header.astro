@@ -154,7 +154,22 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
           actions?.length ? (
             <span class="ml-4 rtl:ml-0 rtl:mr-4">
               {actions.map((btnProps) => (
-                <Button {...btnProps} class="ml-2 py-2.5 px-5.5 md:px-6 font-semibold shadow-none text-sm w-auto" />
+                btnProps.image ? (
+                  <a 
+                    href={btnProps.href} 
+                    target={btnProps.target} 
+                    class="ml-2 inline-flex items-center justify-center"
+                    aria-label={btnProps.text}
+                  >
+                    <img 
+                      src={btnProps.image} 
+                      alt={btnProps.text} 
+                      class="h-8 w-auto hover:opacity-80 transition-opacity"
+                    />
+                  </a>
+                ) : (
+                  <Button {...btnProps} class="ml-2 py-2.5 px-5.5 md:px-6 font-semibold shadow-none text-sm w-auto" />
+                )
               ))}
             </span>
           ) : (

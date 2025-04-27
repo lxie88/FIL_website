@@ -1,0 +1,90 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import { Icon } from 'astro-icon/components';
+
+const metadata = {
+  title: 'PhD/MS Student Recruitment for Spring/Fall 2025 - Fluid Innovation Lab',
+  description: 'Join our lab as a PhD or MS student in Spring/Fall 2025. Full financial support available for research in fluid mechanics for biomedical and aerospace applications.',
+  ignoreTitleTemplate: true,
+};
+
+// Announcement details
+const announcementDetails = {
+  title: 'PhD/MS Student Recruitment for Spring/Fall 2025',
+  date: 'October 15, 2024',
+  category: 'Announcement',
+  categoryColor: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200',
+};
+---
+
+<Layout metadata={metadata}>
+  <section class="px-4 py-16 sm:px-6 mx-auto lg:px-8 lg:py-20 max-w-7xl">
+    <div class="max-w-3xl mx-auto">
+      <!-- Back to News Link -->
+      <a href="/news" class="inline-flex items-center text-primary-600 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-300 mb-8">
+        <Icon name="tabler:arrow-left" class="w-4 h-4 mr-1" />
+        Back to News
+      </a>
+
+      <!-- Announcement Header -->
+      <div class="mb-8">
+        <span class={`inline-block px-3 py-1 text-sm font-semibold rounded-full ${announcementDetails.categoryColor} mb-4`}>
+          {announcementDetails.category}
+        </span>
+        <h1 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+          {announcementDetails.title}
+        </h1>
+        <p class="text-gray-600 dark:text-slate-400">
+          <time datetime={announcementDetails.date}>{announcementDetails.date}</time>
+        </p>
+      </div>
+
+      <!-- Announcement Content -->
+      <div class="prose prose-lg dark:prose-invert max-w-none">
+        <p class="lead">
+          The Fluid Innovation Lab is seeking motivated PhD and MS students to join our research team in Spring or Fall 2025. We offer exciting opportunities to work on cutting-edge fluid mechanics research with applications in biomedical and aerospace engineering.
+        </p>
+
+        <h2>Available Positions</h2>
+        <ul>
+          <li><strong>PhD Students:</strong> Full financial support (stipend, tuition, and benefits) is available for qualified candidates.</li>
+          <li><strong>MS Students:</strong> Research assistantships with competitive stipends are available.</li>
+          <li><strong>Undergraduate/Graduate Research Assistants:</strong> Part-time positions for students interested in gaining research experience.</li>
+        </ul>
+
+        <h2>Research Areas</h2>
+        <p>
+          Our lab focuses on advanced fluid dynamics research with applications in:
+        </p>
+        <ul>
+          <li>Biomedical engineering (cardiovascular devices, medical implants)</li>
+          <li>Aerospace engineering (propulsion systems, aerodynamic design)</li>
+          <li>Experimental fluid mechanics (advanced measurement techniques)</li>
+          <li>Computational fluid dynamics (simulation and optimization)</li>
+        </ul>
+
+        <h2>Qualifications</h2>
+        <p>
+          Candidates in Mechanical Engineering, Aerospace Engineering, Biomedical Engineering, Electrical Engineering, or closely related fields are encouraged to apply. Experience in experimental or computational fluid mechanics, coding, and problem-solving skills are desired but not essential as training will be provided.
+        </p>
+
+        <h2>Benefits</h2>
+        <ul>
+          <li>Hands-on training in advanced research techniques</li>
+          <li>Opportunity to work on cutting-edge projects</li>
+          <li>Presentations at national and international conferences</li>
+          <li>Collaboration with industry partners and other research institutions</li>
+          <li>Professional development and networking opportunities</li>
+        </ul>
+
+        <h2>How to Apply</h2>
+        <p>
+          If you are interested in joining our lab, please send your CV with a brief cover letter to <a href="mailto:huang.chen@unlv.edu" class="text-primary-600 dark:text-primary-400 hover:underline">huang.chen@unlv.edu</a>.
+        </p>
+        <p>
+          For PhD applicants, you will also need to apply to the UNLV Graduate College. Please visit the <a href="https://www.unlv.edu/graduate-college/admissions" target="_blank" class="text-primary-600 dark:text-primary-400 hover:underline">UNLV Graduate College Admissions page</a> for application deadlines and requirements.
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout> 

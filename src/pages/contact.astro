@@ -1,79 +1,97 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
 import HeroText from '~/components/widgets/HeroText.astro';
-import ContactUs from '~/components/widgets/Contact.astro';
-import Features2 from '~/components/widgets/Features2.astro';
+import { Icon } from 'astro-icon/components';
 
 const metadata = {
-  title: 'Contact',
+  title: 'Contact - Fluid Innovation Lab',
+  description: 'Get in touch with the Fluid Innovation Lab team for research opportunities and collaborations.',
 };
 ---
 
 <Layout metadata={metadata}>
   <!-- HeroText Widget ******************* -->
+  <HeroText tagline="Contact" title="Get in Touch" />
 
-  <HeroText tagline="Contact" title="Let's Connect!" />
+  <!-- Research Opportunities ******************* -->
+  <div class="max-w-6xl mx-auto px-4 py-12">
+    <div class="bg-white dark:bg-slate-800 rounded-lg shadow-md p-8 mb-12">
+      <h2 class="text-2xl font-bold mb-6">Join Our Research Team</h2>
+      <div class="prose dark:prose-invert max-w-none">
+        <div class="grid gap-8 md:grid-cols-2">
+          <div>
+            <h3 class="text-xl font-semibold mb-3">PhD/MS Students</h3>
+            <p>
+              We're looking for passionate students to advance fluid mechanics research in biomedical and aerospace engineering. You'll receive hands-on training, work on cutting-edge projects, and present at national conferences.
+            </p>
+            <p class="mt-2">
+              <strong>Ideal candidates:</strong> Background in Mechanical/Aerospace/Biomedical/Electrical Engineering. Experience in experimental/computational fluid mechanics and coding skills are a plus, but not required.
+            </p>
+          </div>
+          <div>
+            <h3 class="text-xl font-semibold mb-3">Research Assistants</h3>
+            <p>
+              Undergraduate and graduate students are welcome to join our lab as research assistants. This is a great opportunity to gain hands-on experience in fluid mechanics research.
+            </p>
+            <p class="mt-2">
+              <strong>How to apply:</strong> Send your CV and a brief cover letter to <a href="mailto:huang.chen@unlv.edu" class="text-primary hover:underline">huang.chen@unlv.edu</a>
+            </p>
+          </div>
+          <div class="md:col-span-2">
+            <h3 class="text-xl font-semibold mb-3">Postdoctoral Researchers</h3>
+            <p>
+              We welcome postdoctoral researchers with expertise in fluid mechanics, computational methods, or experimental techniques. Join our team to advance cutting-edge research in a collaborative environment.
+            </p>
+            <p class="mt-2">
+              <strong>Interested?</strong> Contact us with your CV and research interests to discuss potential opportunities.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
 
-  <ContactUs
-    id="form"
-    title="Drop us a message today!"
-    subtitle="For quicker answers, explore our FAQs section. You may find the solution you're looking  for right there! If not, our support team is delighted to help you."
-    inputs={[
-      {
-        type: 'text',
-        name: 'name',
-        label: 'Name',
-      },
-      {
-        type: 'email',
-        name: 'email',
-        label: 'Email',
-      },
-    ]}
-    textarea={{
-      label: 'Message',
-    }}
-    disclaimer={{
-      label:
-        'By submitting this contact form, you acknowledge and agree to the collection of your personal information.',
-    }}
-    description="Our support team typically responds within 24 business hours."
-  />
+    <!-- Contact Information ******************* -->
+    <div class="bg-white dark:bg-slate-800 rounded-lg shadow-md p-8 mb-12">
+      <h2 class="text-2xl font-bold mb-6">Contact Information</h2>
+      <div class="grid gap-6">
+        <div class="flex items-start">
+          <Icon name="tabler:mail" class="w-6 h-6 text-primary mr-3 mt-1 flex-shrink-0" />
+          <div>
+            <h3 class="text-lg font-semibold mb-1">Email</h3>
+            <a href="mailto:huang.chen@unlv.edu" class="text-primary hover:underline">huang.chen@unlv.edu</a>
+          </div>
+        </div>
+        <div class="flex items-start">
+          <Icon name="tabler:phone" class="w-6 h-6 text-primary mr-3 mt-1 flex-shrink-0" />
+          <div>
+            <h3 class="text-lg font-semibold mb-1">Phone</h3>
+            <a href="tel:+17027743432" class="text-primary hover:underline">+1 702-774-3432</a>
+          </div>
+        </div>
+        <div class="flex items-start">
+          <Icon name="tabler:map-pin" class="w-6 h-6 text-primary mr-3 mt-1 flex-shrink-0" />
+          <div>
+            <h3 class="text-lg font-semibold mb-1">Address</h3>
+            <p>4505 S Maryland Pkwy, Las Vegas, NV 89141</p>
+          </div>
+        </div>
+      </div>
+    </div>
 
-  <!-- Features2 Widget ************** -->
-
-  <Features2
-    title="We are here to help!"
-    items={[
-      {
-        title: 'General support',
-        description: `Chat with us for inquiries related to account management, website navigation, payment issues, accessing purchased templates or general questions about the website's functionality.`,
-      },
-      {
-        title: 'Contact sales',
-        description:
-          'Chat with us for questions about purchases, customization options, licensing for commercial use, inquiries about specific template, etc.',
-      },
-      {
-        title: 'Technical support',
-        description:
-          'Chat with us when facing issues like template installation, problems editing difficulties, compatibility issues with software or download errors, or other technical challenges related to using the templates.',
-      },
-      {
-        title: 'Phone',
-        description: '+1 (234) 567-890',
-        icon: 'tabler:headset',
-      },
-      {
-        title: 'Email',
-        description: 'contact@support.com',
-        icon: 'tabler:mail',
-      },
-      {
-        title: 'Location',
-        description: '1234 Lorem Ipsum St, 12345, Miami, EEUU',
-        icon: 'tabler:map-pin',
-      },
-    ]}
-  />
+    <!-- Map ******************* -->
+    <div class="bg-white dark:bg-slate-800 rounded-lg shadow-md p-8">
+      <h2 class="text-2xl font-bold mb-6">Find Us</h2>
+      <div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden">
+        <iframe 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3224.827850780012!2d-115.13761592468453!3d36.11297997913672!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c8bc2d05cbe3eb%3A0x74caffb4419a2cd9!2sUniversity%20of%20Nevada%2C%20Las%20Vegas!5e0!3m2!1sen!2sus!4v1709912345678!5m2!1sen!2sus" 
+          width="100%" 
+          height="450" 
+          style="border:0;" 
+          allowfullscreen="" 
+          loading="lazy" 
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </div>
+  </div>
 </Layout>

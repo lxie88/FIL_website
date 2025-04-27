@@ -1,0 +1,124 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import { Icon } from 'astro-icon/components';
+
+const metadata = {
+  title: 'New Role: Tenure-Track Assistant Professor at UNLV - Fluid Innovation Lab',
+  description: 'Announcement of new position as Tenure-Track Assistant Professor at the University of Nevada-Las Vegas',
+  ignoreTitleTemplate: true,
+};
+
+const achievement = {
+  title: 'New Role: Tenure-Track Assistant Professor at UNLV',
+  date: 'August 21, 2023',
+  category: 'Achievements',
+  categoryColor: 'bg-pink-100 text-pink-800 dark:bg-pink-900 dark:text-pink-200',
+  content: 'I\'m excited to announce that I\'ll be starting a new role as a Tenure-Track Assistant Professor at the University of Nevada-Las Vegas this fall. I\'ll be diving into using advanced fluid measurement and simulation techniques to study complex flows associated with aerospace and biomedical applications. A big thanks to everyone who\'s been there with support and encouragement along the way.',
+  additionalContent: 'If you are interested in collaborating or even just curious about what I\'m working on, please don\'t hesitate to reach out. I\'m always up for a chat!',
+  institution: 'University of Nevada-Las Vegas',
+  position: 'Tenure-Track Assistant Professor',
+  startDate: 'Fall 2023',
+  researchFocus: 'Advanced fluid measurement and simulation techniques for complex flows in aerospace and biomedical applications',
+};
+---
+
+<Layout metadata={metadata}>
+  <section class="px-4 py-16 sm:px-6 mx-auto lg:px-8 lg:py-20 max-w-7xl">
+    <div class="max-w-4xl mx-auto">
+      <a
+        href="/news"
+        class="inline-flex items-center text-primary-600 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-300 font-medium mb-8"
+      >
+        <Icon name="tabler:arrow-left" class="w-4 h-4 mr-1" />
+        Back to News
+      </a>
+
+      <article class="bg-white dark:bg-slate-800 rounded-xl shadow-lg p-8">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+          <span class={`inline-block px-3 py-1 rounded-full text-sm font-semibold ${achievement.categoryColor}`}>
+            {achievement.category}
+          </span>
+          <span class="text-sm text-muted dark:text-slate-400 flex items-center mt-2 md:mt-0">
+            <Icon name="tabler:calendar" class="w-4 h-4 mr-1" />
+            {achievement.date}
+          </span>
+        </div>
+
+        <h1 class="text-3xl md:text-4xl font-bold mb-4 text-gray-800 dark:text-white">
+          {achievement.title}
+        </h1>
+
+        <div class="prose prose-lg max-w-none dark:prose-invert">
+          <p class="lead">{achievement.content}</p>
+          
+          <div class="bg-primary-50 dark:bg-slate-700 p-6 rounded-lg my-8">
+            <h2 class="text-2xl font-bold mb-4">Position Details</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <h3 class="font-semibold text-primary-600 dark:text-primary-400">Institution</h3>
+                <p>{achievement.institution}</p>
+              </div>
+              <div>
+                <h3 class="font-semibold text-primary-600 dark:text-primary-400">Position</h3>
+                <p>{achievement.position}</p>
+              </div>
+              <div>
+                <h3 class="font-semibold text-primary-600 dark:text-primary-400">Start Date</h3>
+                <p>{achievement.startDate}</p>
+              </div>
+              <div>
+                <h3 class="font-semibold text-primary-600 dark:text-primary-400">Research Focus</h3>
+                <p>{achievement.researchFocus}</p>
+              </div>
+            </div>
+          </div>
+
+          <p>{achievement.additionalContent}</p>
+
+          <h2 class="text-2xl font-bold mt-8 mb-4">Research Vision</h2>
+          <p>
+            At UNLV, I plan to establish a research program that bridges the gap between aerospace and biomedical fluid dynamics. By leveraging advanced measurement techniques and computational simulations, we'll tackle complex flow problems that have significant implications for both fields.
+          </p>
+          <p>
+            Some key areas of focus will include:
+          </p>
+          <ul>
+            <li>Development of novel fluid measurement techniques for complex geometries</li>
+            <li>Application of aerospace-inspired technologies to biomedical devices</li>
+            <li>Integration of experimental and computational approaches to study fluid-structure interactions</li>
+            <li>Collaboration with medical professionals to address clinical challenges</li>
+          </ul>
+
+          <h2 class="text-2xl font-bold mt-8 mb-4">Share This Achievement</h2>
+          <div class="flex space-x-4">
+            <a
+              href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(achievement.title)}&url=${encodeURIComponent(`https://fluidinnovationlab.com${Astro.url.pathname}`)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-primary-600 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-300"
+              aria-label="Share on Twitter"
+            >
+              <Icon name="tabler:brand-twitter" class="w-6 h-6" />
+            </a>
+            <a
+              href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(`https://fluidinnovationlab.com${Astro.url.pathname}`)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-primary-600 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-300"
+              aria-label="Share on LinkedIn"
+            >
+              <Icon name="tabler:brand-linkedin" class="w-6 h-6" />
+            </a>
+            <a
+              href={`mailto:?subject=${encodeURIComponent(achievement.title)}&body=${encodeURIComponent(`Check out this announcement: https://fluidinnovationlab.com${Astro.url.pathname}`)}`}
+              class="text-primary-600 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-300"
+              aria-label="Share via Email"
+            >
+              <Icon name="tabler:mail" class="w-6 h-6" />
+            </a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+</Layout> 

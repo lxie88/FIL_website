@@ -1,0 +1,216 @@
+---
+import { Icon } from 'astro-icon/components';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import type { Widget } from '~/types';
+import Button from '../ui/Button.astro';
+
+export interface Props extends Widget {
+  title?: string;
+  subtitle?: string;
+  tagline?: string;
+  count?: number;
+  compact?: boolean;
+}
+
+const {
+  title = 'Lab News',
+  subtitle = '',
+  tagline = '',
+  count = 5,
+  compact = false,
+  id,
+  isDark = false,
+  classes = {},
+  bg = await Astro.slots.render('bg'),
+} = Astro.props;
+
+// Sample news data - in a real application, this would come from a CMS or database
+const newsItems = [
+  {
+    title: 'PhD/MS Student Recruitment for Spring/Fall 2025',
+    excerpt: 'We are seeking motivated PhD/MS students to join our lab in Spring/Fall 2025! Full financial support is available.',
+    date: 'October 15, 2024',
+    category: 'Announcement',
+    categoryColor: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200',
+    link: '/news/student-recruitment-2025',
+  },
+  {
+    title: 'Fontan Circulation Support Device Grant Awarded',
+    excerpt: 'Our proposal for "Mechanically Assisted Establishment of Biventricular Physiology for Failing Fontan Circulation" has been recommended for funding.',
+    date: 'August 5, 2024',
+    category: 'Grant',
+    categoryColor: 'bg-cyan-100 text-cyan-800 dark:bg-cyan-900 dark:text-cyan-200',
+    link: '/news/fontan-grant-2024',
+  },
+  {
+    title: '3D Particle Tracking Paper Publication',
+    excerpt: 'Our paper titled "An In-Vitro Study of the Flow past a Transcatheter Aortic Valve Using Time-Resolved 3D Particle Tracking" has been accepted for publication!',
+    date: 'November 9, 2023',
+    category: 'Publications',
+    categoryColor: 'bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-200',
+    link: '/research/publications#3d-particle-tracking',
+  },
+  {
+    title: 'NASA Grant Awarded',
+    excerpt: 'We are excited to announce our proposal, "Nexus of Neutronics-Thermal Fluid Analysis for Optimizing Centrifugal Nuclear Thermal Propulsion," has been selected for funding!',
+    date: 'July 28, 2024',
+    category: 'Grant',
+    categoryColor: 'bg-cyan-100 text-cyan-800 dark:bg-cyan-900 dark:text-cyan-200',
+    link: '/news/nasa-grant-2024',
+  },
+  {
+    title: 'LVAD Research Grant Awarded',
+    excerpt: 'Our team has been awarded a $7.8M DoD grant to develop a novel LVAD with wireless power transfer and antithrombotic coating.',
+    date: 'Jan 15, 2023',
+    category: 'Grant',
+    categoryColor: 'bg-cyan-100 text-cyan-800 dark:bg-cyan-900 dark:text-cyan-200',
+    link: '/news/lvad-grant-2024',
+  },
+  {
+    title: 'TAVR Study Publication',
+    excerpt: 'Our paper titled "Effects of Implantation Height on the Performance of a Redo Transcatheter Aortic Valve Replacement Using a Balloon-Expandable Valve" has been accepted for publication in the JTCVS Open!',
+    date: 'June 15, 2024',
+    category: 'Publications',
+    categoryColor: 'bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-200',
+    link: '/research/publications#tavr-in-tavr-study',
+  }
+];
+
+// Sort news items by date (newest first)
+const sortedNewsItems = [...newsItems].sort((a, b) => {
+  const dateA = new Date(a.date);
+  const dateB = new Date(b.date);
+  return dateB - dateA;
+});
+
+// Get the latest news items
+const latestNews = sortedNewsItems.slice(0, count);
+
+// Custom container class for compact mode
+const containerClass = compact 
+  ? 'py-6 md:py-8 lg:py-10' 
+  : classes?.container as string;
+---
+
+<WidgetWrapper id={id} isDark={isDark} containerClass={containerClass} bg={bg}>
+  <div class="max-w-4xl mx-auto text-center">
+    {title && (
+      <h2 class="mt-6 text-3xl font-bold tracking-tight text-gray-900 dark:!text-gray-100 sm:text-4xl">
+        {title}
+      </h2>
+    )}
+  </div>
+
+  <div class="mt-12 max-w-5xl mx-auto">
+    <div class="rounded-lg shadow-[0_4px_30px_rgba(0,0,0,0.1)] dark:shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur border border-[#ffffff29] bg-white dark:bg-slate-900 overflow-hidden">
+      <div class="p-6">
+        <div class="flex items-center justify-between mb-6">
+          <div class="flex items-center">
+            <div class="bg-primary-600 dark:bg-primary-500 p-2 rounded-lg">
+              <Icon name="tabler:news" class="w-5 h-5 text-white" />
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 dark:!text-gray-100 ml-3">Latest Updates</h3>
+          </div>
+          <a href="/news" class="text-primary-600 dark:!text-primary-300 text-sm font-medium hover:underline flex items-center">
+            View all news
+            <Icon name="tabler:arrow-right" class="w-4 h-4 ml-1" />
+          </a>
+        </div>
+        
+        <div class="timeline-container">
+          {latestNews.map((item, index) => (
+            <div class="timeline-item">
+              <div class="timeline-marker">
+                <div class="timeline-dot"></div>
+                {index !== latestNews.length - 1 && <div class="timeline-line"></div>}
+              </div>
+              <div class="timeline-content bg-gray-50 dark:bg-slate-800 rounded-lg p-3 border border-gray-100 dark:border-slate-700">
+                <div class="flex flex-wrap items-center gap-2 mb-1">
+                  <span class={`px-2 py-0.5 text-xs font-medium rounded-full ${item.categoryColor}`}>
+                    {item.category}
+                  </span>
+                  <span class="text-xs text-gray-500 dark:!text-gray-400 flex items-center">
+                    <Icon name="tabler:calendar" class="w-3 h-3 mr-1" />
+                    {item.date}
+                  </span>
+                </div>
+                <h4 class="text-base font-bold text-gray-900 dark:!text-gray-100 mb-1">
+                  {item.title}
+                </h4>
+                <p class="text-sm text-gray-600 dark:!text-gray-300 mb-2 line-clamp-2">
+                  {item.excerpt}
+                </p>
+                <a href={item.link} class="text-primary-600 dark:!text-primary-300 text-sm font-medium hover:underline inline-flex items-center">
+                  Read more
+                  <Icon name="tabler:arrow-right" class="w-3 h-3 ml-1" />
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</WidgetWrapper>
+
+<style>
+  .timeline-container {
+    position: relative;
+    padding-left: 1.5rem;
+  }
+  
+  .timeline-item {
+    position: relative;
+    padding-bottom: 1.5rem;
+  }
+  
+  .timeline-item:last-child {
+    padding-bottom: 0;
+  }
+  
+  .timeline-marker {
+    position: absolute;
+    left: -1.5rem;
+    top: 0.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+  }
+  
+  .timeline-dot {
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 50%;
+    background-color: #4F46E5;
+    border: 2px solid white;
+    box-shadow: 0 0 0 2px #4F46E5;
+    z-index: 1;
+  }
+  
+  .dark .timeline-dot {
+    background-color: #6366F1;
+    border-color: #0f172a;
+    box-shadow: 0 0 0 2px #6366F1;
+  }
+  
+  .timeline-line {
+    position: absolute;
+    top: 0.75rem;
+    width: 2px;
+    height: calc(100% - 0.75rem);
+    background-color: #E5E7EB;
+  }
+  
+  .dark .timeline-line {
+    background-color: #334155;
+  }
+  
+  .timeline-content {
+    transition: all 0.3s ease;
+  }
+  
+  .timeline-item:hover .timeline-content {
+    transform: translateX(0.25rem);
+  }
+</style> 
